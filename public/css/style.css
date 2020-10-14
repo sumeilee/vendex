@@ -1,0 +1,106 @@
+body {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: 'Merriweather', serif;
+}
+
+header, footer {
+    align-items: center;
+    background-color: #f9dc5c;
+    flex: none;
+    display: flex; 
+}
+
+header {
+    height: 50px;
+    padding: 20px;
+}
+
+main {
+    display: flex;
+    flex: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+footer {
+    height: 50px;
+    justify-content: center;
+    width: 100%;
+}
+
+h1 {
+    margin: 10px auto;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+    margin: 0 20px;
+}
+
+input, button {
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    line-height: 1.5rem;
+    padding: 10px 20px;
+}
+
+input:focus,
+button:focus {
+    border-color: #0366d6;
+    box-shadow: 0 0 0 3px rgba(3,102,214,.3);
+    outline: none;
+}
+
+.navbar {
+    display: flex;
+    position: relative;
+    width: 100%;
+}
+
+.navbar__links {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 10px;
+}
+
+.form__header {
+    text-align: center;
+}
+
+.form__group {
+    box-sizing: border-box;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px auto;
+    max-width: 350px;
+    padding: 10px 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.form-input {
+    box-sizing: border-box;
+    margin: 10px;
+    width: 100%;
+}
+
+.form-btn {
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+

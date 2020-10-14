@@ -1,0 +1,18 @@
+<%- include("./partials/header"); %>
+
+<main>
+    <div class="form__header">
+        <h1>Join us</h1>
+        <p>Sign up for an account</p>
+    </div>
+
+    <form class="form__group" action="#" method="POST">
+        <input class="form-input" type="email" name="email" placeholder="Email" required autocomplete="off" autofocus />
+        <input class="form-input" type="password" name="password" placeholder="Password" required autocomplete="off" />
+        <input class="form-input" type="password" name="password-confirm" placeholder="Re-enter Password" required
+            autocomplete="off" />
+        <button class="form-btn" type="submit">Sign Up</button>
+    </form>
+</main>
+
+<%- include("./partials/footer"); %>

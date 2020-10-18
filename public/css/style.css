@@ -60,18 +60,31 @@ input, button, select, textarea {
     padding: 5px 10px;
 }
 
-textarea {
-    padding: 10px;
+input[type=text],
+input[type=email],
+input[type=password] {
+    width: 100%;
 }
 
 input:focus,
-// button:focus,
+button:focus,
 select:focus,
 textarea:focus {
     border-color: #0366d6;
     box-shadow: 0 0 0 3px rgba(3,102,214,.3);
     outline: none;
 }
+
+textarea {
+    padding: 10px;
+}
+
+label {
+    display: inline-block;
+    margin: 5px;
+}
+
+/* NAV BAR */
 
 .navbar {
     display: flex;
@@ -86,7 +99,6 @@ textarea:focus {
     position: absolute;
     right: 10px;
 }
-
 
 /* FORM STYLES */
 
@@ -103,7 +115,7 @@ textarea:focus {
     margin: 10px auto;
     padding: 0 20px;
     text-align: center;
-    width: 100%;
+    // width: 100%;
 }
 
 .form-input {
@@ -158,11 +170,6 @@ textarea:focus {
     width: 100%;
 }
 
-label {
-    display: inline-block;
-    margin: 5px;
-}
-
 .form-input--checkbox {
     margin: 10px 0;
     text-align: left;
@@ -211,13 +218,16 @@ textarea {
     width: 100%;
 }
 
+/* LOGIN FORM */
+
+.login-form label,
+.signup-form label {
+    text-align: center;
+}
+
 /* MEDIA QUERIES */
 
 @media only screen and (min-width: 500px) {
-    .form__group {
-        width: 650px;
-    }
-
     .form-section__col {
         width: 50%;
     }
@@ -226,11 +236,20 @@ textarea {
         justify-content: flex-start;
         width: 100%;
     }
-
-    .form-input__input {
-        width: 80%;
+    
+    .login-form,
+    .signup-form {
+        width: 300px;
     }
 
+    .vendor-form {
+        width: 650px;
+    }
+
+    .vendor-form input[type=text] {
+        width: 80%;
+    }
+    
     .column-wrap {
         column-count: 2;
     }

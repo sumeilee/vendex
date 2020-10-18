@@ -17,6 +17,10 @@ const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env;
 const mongoURI = `mongodb+srv://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}`;
 mongoose.set("useFindAndModify", false);
 
+// CONTROLLERS
+
+const vendorControllers = require('./controllers/vendorControllers');
+
 // ROUTES
 app.get("/", (req, res) => {
     res.render("./index");
@@ -29,6 +33,10 @@ app.get("/signup", (req, res) => {
 app.get("/login", (req, res) => {
     res.render("./login");
 })
+
+// VENDOR ROUTES
+
+app.get("/vendors/new", vendorControllers.showNewVendorForm);
 
 // mongoose
 //     .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })

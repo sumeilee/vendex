@@ -1,0 +1,124 @@
+<%- include("./../partials/header"); %>
+
+<main>
+    <div class="container">
+        <div class="form__header">
+            <h2>New Vendor</h2>
+        </div>
+
+        <form class="form__group" autocomplete="off" action="#" method="POST">
+            <div class="form-section" id="section--vendor">
+                <h3 class="form-section__header">Vendor Type</h3>
+
+                <% const vendorTypes = ["Aircon Servicing", "Cleaner", "Electrician", "Gardener", "Locksmith", "Plumber"]; %>
+                <% if (vendorTypes.length > 2) { %>
+                <div class="column-wrap">
+                    <% } %>
+
+                    <% vendorTypes.forEach((vendorType, idx) => { %>
+                    <% const slug = vendorType.toLowerCase().replace(" ", "_"); %>
+
+                    <div class="form-input--checkbox">
+                        <input class="checkbox-input" type="checkbox" name="<%= slug %>" id="<%= `toggle--${slug}` %>">
+                        <label class="checkbox-label" for="<%= slug %>"><%= vendorType %></label>
+                    </div>
+                    <% }); %>
+                    <% if (vendorTypes.length > 2) { %>
+                </div>
+                <% } %>
+            </div>
+
+            <div class="form-section">
+                <h3 class="form-section__header">Basic Information</h3>
+
+                <div class="form-section__col">
+                    <div class="form-input">
+                        <label class="form-input__label" for="company_name">Company Name</label>
+                        <input class="form-input__input" type="text" name="company_name" id="company_name" />
+                    </div>
+
+                    <div class="form-input">
+                        <label class="form-input__label" for="contact_name">Contact Name</label>
+                        <input class="form-input__input" type="text" name="contact_name" id="contact_name" />
+                    </div>
+                </div>
+                <div class="form-section__col">
+                    <div class="form-input">
+                        <label class="form-input__label" for="contact_number">Contact Number</label>
+                        <input class="form-input__input" type="text" name="contact_number" id="contact_number" />
+                    </div>
+
+                    <div class="form-input">
+                        <label class="form-input__label" for="email">Email</label>
+                        <input class="form-input__input" type="text" name="email" id="email" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="toggle-panel" id="toggle--web">
+                <span class="toggle-header" id="toggle__symbol--web">+</span> Websites
+            </div>
+            <div class="toggle-section" id="section--web">
+                <div class="form-section">
+                    <div class="form-section__col">
+                        <div class="form-input">
+                            <label class="form-input__label" for="url">Website</label>
+                            <input class="form-input__input" type="text" name="url" id="url" />
+                        </div>
+                    </div>
+                    <div class="form-section__col">
+                        <div class="form-input">
+                            <label class="form-input__label" for="fb">Facebook</label>
+                            <input class="form-input__input" type="text" name="fb" id="fb" />
+                        </div>
+                        <div class="form-input">
+                            <label class="form-input__label" for="insta">Instagram</label>
+                            <input class="form-input__input" type="text" name="insta" id="insta" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="toggle-panel" id="toggle--address">
+                <span class="toggle-header" id="toggle__symbol--address">+</span> Address
+            </div>
+            <div class="toggle-section" id="section--address">
+                <div class="form-section">
+                    <div class="form-section__col">
+                        <div class="form-input">
+                            <label class="form-input__label" for="addr_line_1">Address Line 1</label>
+                            <input class="form-input__input" type="text" name="addr_line_1" id="addr_line_1" />
+                        </div>
+                        <div class="form-input">
+                            <label class="form-input__label" for="addr_line_2">Address Line 2</label>
+                            <input class="form-input__input" type="text" name="addr_line_2" id="addr_line_2" />
+                        </div>
+                        <div class="form-input">
+                            <label class="form-input__label" for="city">City</label>
+                            <input class="form-input__input" type="text" name="city" id="city" />
+                        </div>
+                    </div>
+                    <div class="form-section__col">
+                        <div class="form-input">
+                            <label class="form-input__label" for="state">State</label>
+                            <input class="form-input__input" type="text" name="state" id="state" />
+                        </div>
+                        <div class="form-input">
+                            <label class="form-input__label" for="postal_code">Postal Code</label>
+                            <input class="form-input__input" type="text" name="postal_code" id="postal_code" />
+                        </div>
+                        <div class="form-input">
+                            <label class="form-input__label" for="country">Country</label>
+                            <input class="form-input__input" type="text" name="country" id="country" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="form-btn" type="submit">Add To My List</button>
+        </form>
+    </div>
+</main>
+
+<%- include("./../partials/footer"); %>

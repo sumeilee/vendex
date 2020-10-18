@@ -100,6 +100,11 @@ label {
     right: 10px;
 }
 
+.navbar__btn {
+    background-color: lightgrey;
+    cursor: pointer;
+}
+
 /* FORM STYLES */
 
 .form__header {
@@ -249,7 +254,7 @@ textarea {
     .vendor-form input[type=text] {
         width: 80%;
     }
-    
+
     .column-wrap {
         column-count: 2;
     }

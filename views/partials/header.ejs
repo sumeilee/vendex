@@ -17,8 +17,17 @@
 		<nav class="navbar">
 			<a href="/" class="navbar__logo">Logo</a>
 			<ul class="navbar__links">
-				<li><a href="/login">Login</a></li>
+				<% if (!user) { %>
+				<li><a href="/login">Log In</a></li>
 				<li><a href="/signup">Sign Up</a></li>
+				<% } else { %>
+				<li>
+					<form action="/logout" method="POST">
+						<button class="navbar__btn" type="submit">Log Out</a>
+					</form>
+
+				</li>
+				<% } %>
 			</ul>
 
 		</nav>

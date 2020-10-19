@@ -6,7 +6,7 @@
             <h2>New Vendor</h2>
         </div>
 
-        <form class="form__group vendor-form" autocomplete="off" action="#" method="POST">
+        <form class="form__group" id="vendor-form" autocomplete="off">
             <div class="form-section" id="section--vendor">
                 <h3 class="form-section__header">Vendor Type</h3>
 
@@ -19,8 +19,9 @@
                     <% const slug = vendorType.toLowerCase().replace(" ", "_"); %>
 
                     <div class="form-input--checkbox">
-                        <input class="checkbox-input" type="checkbox" name="<%= slug %>" id="<%= `toggle--${slug}` %>">
-                        <label class="checkbox-label" for="<%= slug %>"><%= vendorType %></label>
+                        <input class="checkbox-input" type="checkbox" name="<%= `vendor--${slug}` %>"
+                            id="<%= `${slug}` %>" value="<%= `${vendorType}` %>">
+                        <label class="checkbox-label" for="<%= `${slug}` %>"><%= vendorType %></label>
                     </div>
                     <% }); %>
                     <% if (vendorTypes.length > 2) { %>
@@ -65,15 +66,19 @@
                             <label class="form-input__label" for="url">Website</label>
                             <input class="form-input__input" type="text" name="url" id="url" />
                         </div>
+                        <div class="form-input">
+                            <label class="form-input__label" for="facebook">Facebook</label>
+                            <input class="form-input__input" type="text" name="facebook" id="facebook" />
+                        </div>
                     </div>
                     <div class="form-section__col">
                         <div class="form-input">
-                            <label class="form-input__label" for="fb">Facebook</label>
-                            <input class="form-input__input" type="text" name="fb" id="fb" />
+                            <label class="form-input__label" for="instagram">Instagram</label>
+                            <input class="form-input__input" type="text" name="instagram" id="instagram" />
                         </div>
                         <div class="form-input">
-                            <label class="form-input__label" for="insta">Instagram</label>
-                            <input class="form-input__input" type="text" name="insta" id="insta" />
+                            <label class="form-input__label" for="other_url">Other URL</label>
+                            <input class="form-input__input" type="text" name="other_url" id="other_url" />
                         </div>
                     </div>
                 </div>
@@ -87,29 +92,29 @@
                     <div class="form-section__col">
                         <div class="form-input">
                             <label class="form-input__label" for="addr_line_1">Address Line 1</label>
-                            <input class="form-input__input" type="text" name="addr_line_1" id="addr_line_1" />
+                            <input class="form-input__input" type="text" name="address--addr_line_1" id="addr_line_1" />
                         </div>
                         <div class="form-input">
                             <label class="form-input__label" for="addr_line_2">Address Line 2</label>
-                            <input class="form-input__input" type="text" name="addr_line_2" id="addr_line_2" />
+                            <input class="form-input__input" type="text" name="address--addr_line_2" id="addr_line_2" />
                         </div>
                         <div class="form-input">
                             <label class="form-input__label" for="city">City</label>
-                            <input class="form-input__input" type="text" name="city" id="city" />
+                            <input class="form-input__input" type="text" name="address--city" id="city" />
                         </div>
                     </div>
                     <div class="form-section__col">
                         <div class="form-input">
                             <label class="form-input__label" for="state">State</label>
-                            <input class="form-input__input" type="text" name="state" id="state" />
+                            <input class="form-input__input" type="text" name="address--state" id="state" />
                         </div>
                         <div class="form-input">
                             <label class="form-input__label" for="postal_code">Postal Code</label>
-                            <input class="form-input__input" type="text" name="postal_code" id="postal_code" />
+                            <input class="form-input__input" type="text" name="address--postal_code" id="postal_code" />
                         </div>
                         <div class="form-input">
                             <label class="form-input__label" for="country">Country</label>
-                            <input class="form-input__input" type="text" name="country" id="country" />
+                            <input class="form-input__input" type="text" name="address--country" id="country" />
                         </div>
                     </div>
                 </div>

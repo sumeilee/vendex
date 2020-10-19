@@ -159,7 +159,6 @@ label {
 
 .toggle-section {
     display: none;
-    margin-bottom: 20px;
 }
 
 .form-section {
@@ -223,6 +222,10 @@ textarea {
     width: 100%;
 }
 
+.checkbox-label {
+    cursor: pointer;
+}
+
 /* LOGIN FORM */
 
 .login-form label,
@@ -241,13 +244,17 @@ textarea {
         justify-content: flex-start;
         width: 100%;
     }
+
+    .form-section__col .form-input {
+        width: 90%;
+    }
     
     .login-form,
     .signup-form {
         width: 300px;
     }
 
-    .vendor-form {
+    #vendor-form {
         width: 650px;
     }
 

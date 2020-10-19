@@ -29,3 +29,36 @@ const handleToggleSection = (target) => {
         }
     }
 }
+
+document.getElementById("vendor-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const data = Object.fromEntries(new FormData(e.target));
+
+    const doc = {};
+
+    const vendor_type = [];
+    const address = {};
+
+    for (key in data) {
+        if (key.startsWith("address--")) {
+            const field = key.split("--")[1];
+            address[field] = data[key];
+        } else if (key.startsWith("vendor--")) {
+            vendor_type.push(data[key]);
+        } else {
+            doc[key] = data[key];
+        }
+    }
+
+    doc["vendor_type"] = vendor_type;
+    doc["address"] = address;
+
+    console.log(doc);
+
+    try {
+        axios.post("/vendors/new", doc);
+    } catch (err) {
+        console.log(err);
+    }
+});

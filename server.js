@@ -11,6 +11,7 @@ const port = 5000;
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
     session({
@@ -57,11 +58,15 @@ app.post("/login", authControllers.login);
 app.post("/logout", authControllers.logout);
 
 // VENDOR ROUTES
-
 app.get("/vendors/new", vendorControllers.showNewVendorForm);
+app.post("/vendors/new", vendorControllers.createVendor);
 
 // USER ROUTES
-app.get("/users/dashboard", authMiddleware.authenticatedOnly, userControllers.showDashbaord);
+app.get(
+    "/users/dashboard",
+    authMiddleware.authenticatedOnly,
+    userControllers.showDashbaord
+);
 
 mongoose
     .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })

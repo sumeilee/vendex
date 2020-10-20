@@ -8,6 +8,12 @@ body.addEventListener("click", (e) => {
     }
 });
 
+body.addEventListener("submit", (e) => {
+    if (e.target.id === "vendor-form") {
+        handleVendorFormSubmit(e);
+    }
+})
+
 const handleToggleSection = (target) => {
     const section = target.id.split("--")[1];
     const sectionDiv = document.querySelector(`#section--${section}`);
@@ -30,7 +36,7 @@ const handleToggleSection = (target) => {
     }
 }
 
-document.getElementById("vendor-form").addEventListener("submit", async (e) => {
+const handleVendorFormSubmit = async (e) => {
     e.preventDefault();
 
     const data = Object.fromEntries(new FormData(e.target));
@@ -54,11 +60,13 @@ document.getElementById("vendor-form").addEventListener("submit", async (e) => {
     doc["vendor_type"] = vendor_type;
     doc["address"] = address;
 
-    console.log(doc);
+    // console.log(doc);
 
     try {
-        axios.post("/vendors/new", doc);
+        const response = await axios.post("/vendors/new", doc);
+
+        window.location = response.data.redirect;
     } catch (err) {
         console.log(err);
     }
-});
+};

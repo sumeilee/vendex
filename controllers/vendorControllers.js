@@ -1,15 +1,25 @@
+const User = require("../models/User");
 const Vendor = require("./../models/Vendor");
 
 exports.showNewVendorForm = (req, res) => {
     res.render("./vendors/new");
 }
 
-exports.createVendor = async (req, res) => {
+exports.createUserVendor = async (req, res) => {
     try {
-        const vendor = await Vendor.create(req.body);
-        res.send(vendor);
+        const _id = req.session.user._id;
+        const vendor = await Vendor.create({
+            ...req.body,
+            user: _id
+        });
+
+        const user = await User.findOne({ _id });
+        await user.vendors.push(vendor._id);
+        await user.save();
+
+        res.json({ redirect: "/users/dashboard" });
     } catch (err) {
         console.log(err);
-        res.redirect("/vendors/new");
+        res.json({ redirect: "/vendors/new" });
     }
 }

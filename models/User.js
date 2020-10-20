@@ -12,14 +12,26 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    created_at: {
+    createdAt: {
         type: Date,
         default: new Date()
     },
-    updated_at: {
+    updatedAt: {
         type: String,
         default: new Date()
-    }
+    },
+    vendors: [{
+        type: mongoose.Schema.ObjectId,
+        ref: "Vendor"
+    }],
+    // watchList: [{
+    //     type: mongoose.Schema.ObjectId,
+    //     ref: "Vendor"
+    // }],
+    friends: [{
+        type: mongoose.Schema.ObjectId,
+        ref: "User"
+    }]
 });
 
 const User = mongoose.model("User", userSchema);

@@ -26,7 +26,11 @@ exports.signup = async (req, res) => {
             passwordHash
         });
 
-        req.session.user = user;
+        req.session.user = {
+            _id: user._id,
+            email: user.email
+        };
+
         res.redirect("/users/dashboard");
     } catch (err) {
         console.log(err);
@@ -52,7 +56,11 @@ exports.login = async (req, res) => {
         const authenticated = await bcrypt.compare(password, user.passwordHash);
 
         if (authenticated) {
-            req.session.user = user;
+            req.session.user = {
+                _id: user._id,
+                email: user.email
+            };
+
             res.redirect("/users/dashboard");
         } else {
             res.redirect("/login");

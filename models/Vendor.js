@@ -1,16 +1,16 @@
 const mongoose = require("mongoose");
 
 const vendorSchema = new mongoose.Schema({
-    vendor_type: [String],
-    company_name: String,
-    contact_name: String,
-    country_code: String,
-    contact_number: String,
+    vendorType: [String],
+    companyName: String,
+    contactName: String,
+    countryCode: String,
+    contactNumber: String,
     email: String,
     address: {
-        addr_line_1: String,
-        addr_line_2: String,
-        postal_code: String,
+        addrLine1: String,
+        addrLine2: String,
+        postalCode: String,
         city: String,
         state: String,
         country: String
@@ -19,7 +19,19 @@ const vendorSchema = new mongoose.Schema({
     url: String,
     facebook: String,
     instagram: String,
-    other_url: String
+    otherUrl: String,
+    user: {
+        type: mongoose.Schema.ObjectId,
+        ref: "User"
+    },
+    createdAt: {
+        type: Date,
+        default: new Date()
+    },
+    updatedAt: {
+        type: Date,
+        default: new Date()
+    }
 });
 
 const Vendor = mongoose.model("Vendor", vendorSchema);

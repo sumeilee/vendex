@@ -1,0 +1,26 @@
+<%- include("./../partials/header"); %>
+
+<main>
+    <div class="container">
+        <section class="vendors-section">
+            <% Object.keys(vendorObj).forEach(vendorType => { %>
+            <h5 class="vendors__header"><%= vendorType %></h5>
+            <% vendorObj[vendorType].forEach(vendor => { %>
+            <div class="vendor-card">
+                <div class="vendor-summary">
+                    <p><%= vendor.companyName %></p>
+                    <p><%= vendor.contactName %></p>
+                    <p><%= vendor.contactNumber %></p>
+                    <p><%= vendor.email %></p>
+
+                    <p><a href="/vendors/<%= vendor._id %>">More details</a></p>
+                </div>
+            </div>
+            <% }) %>
+            <% }) %>
+        </section>
+
+    </div>
+</main>
+
+<%- include("./../partials/footer"); %>

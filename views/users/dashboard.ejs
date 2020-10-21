@@ -1,29 +1,25 @@
 <%- include("./../partials/header"); %>
 
 <main>
-    <!-- <h2>Dashboard</h2> -->
+    <div class="dashboard">
+        <h3 class="dashboard__header">My Vendors</h3>
+        <% Object.keys(vendorObj).forEach(vendorType => { %>
+        <div class="dashboard-vendors">
+            <h5 class="dashboard-vendors__header"><%= vendorType %></h5>
+            <% vendorObj[vendorType].forEach(vendor => { %>
+            <div class="dashboard-vendors__card">
+                <div class="dashboard-vendors__summary">
+                    <p><%= vendor.companyName %></p>
+                    <p><%= vendor.contactName %></p>
+                    <p><%= vendor.contactNumber %></p>
+                    <p><%= vendor.email %></p>
 
-    <div class="dashboard-container">
-        <div class="dashboard-section">
-            <h3 class="dashboard--section__header">My Vendors</h3>
-            <% Object.keys(vendorObj).forEach(vendorType => { %>
-            <div class="dashboard-vendors">
-                <h5 class="vendors__header"><%= vendorType %></h5>
-                <% vendorObj[vendorType].forEach(vendor => { %>
-                <div class="dashboard vendor-card">
-                    <div class="vendor-summary">
-                        <p><%= vendor.companyName %></p>
-                        <p><%= vendor.contactName %></p>
-                        <p><%= vendor.contactNumber %></p>
-                        <p><%= vendor.email %></p>
-
-                        <p><a href="/vendors/<%= vendor._id %>">More details</a></p>
-                    </div>
+                    <p><a href="/vendors/<%= vendor._id %>">More details</a></p>
                 </div>
-                <% }) %>
             </div>
             <% }) %>
         </div>
+        <% }) %>
     </div>
 </main>
 

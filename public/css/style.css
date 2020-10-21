@@ -233,26 +233,53 @@ textarea {
     text-align: center;
 }
 
-/* DASHBOARD */
+/* PUBLIC VENDORS */
 
-.container {
+.public {
     max-width: 650px;
     width: 100%;
 }
 
-.dashboard-vendors,
-.vendors-section {
+.public-vendors
+ {
     align-items: center;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
 }
 
-.vendors__header {
+.public-vendors__header {
     width: 100%;
 }
 
-.vendor-card {
+.public-vendors__card {
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+    width: 80%;
+}
+
+/* DASHBOARD */
+
+.dashboard {
+    max-width: 650px;
+    width: 100%;
+}
+
+.dashboard-vendors
+ {
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.dashboard-vendors__header {
+    width: 100%;
+}
+
+.dashboard-vendors__card {
     border: 1px solid lightgrey;
     border-radius: 10px;
     margin: 10px;
@@ -293,12 +320,24 @@ textarea {
         column-count: 2;
     }
 
+    /* PUBLIC */
+
+    .public-vendors {
+        justify-content: flex-start;
+    }
+
+    .public-vendors__card {
+        width: 250px;
+    }
+    
+    /* DASHBOARD */
+
     .dashboard-vendors,
     .vendors-section {
         justify-content: flex-start;
     }
 
-    .vendor-card {
+    .dashboard-vendors__card {
         width: 250px;
     }
 

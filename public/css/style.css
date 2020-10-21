@@ -31,7 +31,7 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 20px 40px;
 }
 
 footer {
@@ -249,21 +249,23 @@ textarea {
 }
 
 .public-vendors__header {
+    text-align: center;
     width: 100%;
 }
 
 .public-vendors__card {
     border: 1px solid lightgrey;
     border-radius: 10px;
-    margin: 10px;
+    margin: 10px 0;
     padding: 20px;
-    width: 80%;
+    width: 100%;
 }
 
 /* DASHBOARD */
 
 .dashboard {
     max-width: 650px;
+    position: relative;
     width: 100%;
 }
 
@@ -282,9 +284,21 @@ textarea {
 .dashboard-vendors__card {
     border: 1px solid lightgrey;
     border-radius: 10px;
-    margin: 10px;
+    margin: 10px 0;
     padding: 20px;
-    width: 80%;
+    width: 100%;
+}
+
+/* ADD BUTTON */
+
+.add-btn {
+    border: none;
+    border-radius: 50%;
+    height: 50px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 50px;
 }
 
 /* MEDIA QUERIES */
@@ -327,9 +341,10 @@ textarea {
     }
 
     .public-vendors__card {
+        margin: 10px;
         width: 250px;
     }
-    
+
     /* DASHBOARD */
 
     .dashboard-vendors,
@@ -338,6 +353,7 @@ textarea {
     }
 
     .dashboard-vendors__card {
+        margin: 10px;
         width: 250px;
     }
 

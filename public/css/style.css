@@ -100,7 +100,7 @@ label {
     right: 10px;
 }
 
-.navbar__btn {
+.navbar button {
     background-color: lightgrey;
     cursor: pointer;
 }
@@ -235,23 +235,24 @@ textarea {
 
 /* DASHBOARD */
 
-.dashboard-container {
+.container {
     max-width: 650px;
     width: 100%;
 }
 
-.dashboard-vendors {
+.dashboard-vendors,
+.vendors-section {
     align-items: center;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
 }
 
-.dashboard-vendors__header {
+.vendors__header {
     width: 100%;
 }
 
-.dashboard-vendor-card {
+.vendor-card {
     border: 1px solid lightgrey;
     border-radius: 10px;
     margin: 10px;
@@ -292,11 +293,12 @@ textarea {
         column-count: 2;
     }
 
-    .dashboard-vendors {
+    .dashboard-vendors,
+    .vendors-section {
         justify-content: flex-start;
     }
 
-    .dashboard-vendor-card {
+    .vendor-card {
         width: 250px;
     }
 

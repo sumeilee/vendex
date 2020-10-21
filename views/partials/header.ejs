@@ -18,10 +18,13 @@
 			<a href="/" class="navbar__logo">Logo</a>
 			<ul class="navbar__links">
 				<% if (!user) { %>
+				<li><a href="/vendors">Browse Vendors</a></li>
 				<li><a href="/login">Log In</a></li>
 				<li><a href="/signup">Sign Up</a></li>
 				<% } else { %>
-				<li><a href="/vendors/new">Add Vendor</a></li>
+
+				<li><a href="/users/dashboard"><button>Dashboard</button></a></li>
+				<li><a href="/vendors/new"><button>Add Vendor</button></a></li>
 				<li>
 					<form action="/logout" method="POST">
 						<button class="navbar__btn" type="submit">Log Out</a>

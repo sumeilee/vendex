@@ -58,6 +58,8 @@ app.post("/login", authControllers.login);
 app.post("/logout", authControllers.logout);
 
 // VENDOR ROUTES
+app.get("/vendors", vendorControllers.showVendors);
+
 app.get(
     "/vendors/new",
     // authMiddleware.authenticatedOnly,
@@ -69,6 +71,8 @@ app.post(
     // authMiddleware.authenticatedOnly,
     vendorControllers.createUserVendor
 );
+
+app.get("/vendors/:id", vendorControllers.showVendorProfile);
 
 // USER ROUTES
 app.get(

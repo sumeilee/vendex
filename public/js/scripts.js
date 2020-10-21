@@ -43,7 +43,7 @@ const handleVendorFormSubmit = async (e) => {
 
     const doc = {};
 
-    const vendor_type = [];
+    const vendorType = [];
     const address = {};
 
     for (key in data) {
@@ -51,16 +51,16 @@ const handleVendorFormSubmit = async (e) => {
             const field = key.split("--")[1];
             address[field] = data[key];
         } else if (key.startsWith("vendor--")) {
-            vendor_type.push(data[key]);
+            vendorType.push(data[key]);
         } else {
             doc[key] = data[key];
         }
     }
 
-    doc["vendor_type"] = vendor_type;
+    doc["vendorType"] = vendorType;
     doc["address"] = address;
 
-    // console.log(doc);
+    console.log(doc);
 
     try {
         const response = await axios.post("/vendors/new", doc);

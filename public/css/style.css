@@ -233,9 +233,35 @@ textarea {
     text-align: center;
 }
 
+/* DASHBOARD */
+
+.dashboard-container {
+    max-width: 650px;
+    width: 100%;
+}
+
+.dashboard-vendors {
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.dashboard-vendors__header {
+    width: 100%;
+}
+
+.dashboard-vendor-card {
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+    width: 80%;
+}
+
 /* MEDIA QUERIES */
 
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 600px) {
     .form-section__col {
         width: 50%;
     }
@@ -265,4 +291,13 @@ textarea {
     .column-wrap {
         column-count: 2;
     }
+
+    .dashboard-vendors {
+        justify-content: flex-start;
+    }
+
+    .dashboard-vendor-card {
+        width: 250px;
+    }
+
 }

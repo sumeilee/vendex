@@ -1,4 +1,5 @@
 const body = document.querySelector("body");
+const navbarLinks = document.querySelector(".navbar__links");
 
 body.addEventListener("click", (e) => {
     if (e.target.id.startsWith("toggle--")) {
@@ -70,3 +71,12 @@ const handleVendorFormSubmit = async (e) => {
         console.log(err);
     }
 };
+
+const toggleSideMenu = () => {
+    if (navbarLinks.classList.contains("responsive")) {
+        navbarLinks.classList.remove("responsive");
+    } else {
+        navbarLinks.classList.add("responsive");
+    }
+    // console.log("toggling side menu");
+}

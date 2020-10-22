@@ -37,6 +37,7 @@ mongoose.set("useFindAndModify", false);
 const authControllers = require("./controllers/authControllers");
 const vendorControllers = require('./controllers/vendorControllers');
 const userControllers = require("./controllers/userControllers");
+const friendControllers = require("./controllers/friendControllers");
 
 // MIDDLEWARE
 
@@ -80,6 +81,25 @@ app.get(
     authMiddleware.authenticatedOnly,
     userControllers.showDashbaord
 );
+
+app.get(
+    "/users/friends",
+    authMiddleware.authenticatedOnly,
+    friendControllers.showFriends
+);
+
+app.get(
+    "/users/friends/new",
+    authMiddleware.authenticatedOnly,
+    friendControllers.showFriendForm
+);
+
+app.post(
+    "/users/friends/new",
+    authMiddleware.authenticatedOnly,
+    friendControllers.addFriend
+);
+
 
 mongoose
     .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })

@@ -1,0 +1,15 @@
+<%- include("./../../partials/header"); %>
+
+<main>
+    <div class="container friends">
+        <h2>Friends</h2>
+        <% friends.forEach(friend => { %>
+        <div class="friend">
+            <%= friend %>
+        </div>
+        <% }) %>
+        <a href="/users/friends/new"><button class="add-btn">+</button></a>
+    </div>
+</main>
+
+<%- include("./../../partials/footer"); %>

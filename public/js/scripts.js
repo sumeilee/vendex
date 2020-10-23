@@ -1,5 +1,12 @@
 const body = document.querySelector("body");
 const navbarLinks = document.querySelector(".navbar__links");
+const hamburgerIcon = document.querySelector("#hamburger-icon");
+
+window.addEventListener("resize", () => {
+    if (window.innerWidth > 600) {
+        navbarLinks.classList.remove("responsive");
+    }
+})
 
 body.addEventListener("click", (e) => {
     if (e.target.id.startsWith("toggle--")) {
@@ -79,4 +86,14 @@ const toggleSideMenu = () => {
         navbarLinks.classList.add("responsive");
     }
     // console.log("toggling side menu");
+}
+
+const makeActive = (target, activeClassName) => {
+    const currentActive = document.querySelector(`.${activeClassName}`);
+    if (currentActive) {
+        currentActive.classList.remove(activeClassName);
+    }
+
+    console.log(target);
+    target.classList.add(activeClassName);
 }

@@ -2,29 +2,42 @@
 
 <main>
     <div class="container dashboard">
-        <h3 class="dashboard__header">My Vendors</h3>
-        <a href="/users/dashboard?vendors=mine">Mine</a>
-        <a href="/users/dashboard?vendors=friends">Friends</a>
+        <div class="vendors-header">
+            <h2>Vendors</h2>
+            <a class="tab-bar__link <%- whoseVendors === "mine" ? "tab-bar__link--active" : "" %>"
+                href="/users/dashboard?vendors=mine">Mine</a>
+            <a class="tab-bar__link <%- whoseVendors === "friends" ? "tab-bar__link--active" : "" %>"
+                href="/users/dashboard?vendors=friends">Friends'</a>
+        </div>
 
         <% Object.keys(vendorObj).forEach(vendorType => { %>
         <div class="dashboard-vendors">
-            <h5 class="dashboard-vendors__header"><%= vendorType %></h5>
+            <div class="vendor-header">
+                <p><%= vendorType %></p>
+                <!-- <h5 class="dashboard-vendors__header"><%= vendorType %></h5> -->
+            </div>
             <% vendorObj[vendorType].forEach(vendor => { %>
-            <div class="dashboard-vendors__card">
+            <div class="dashboard-vendors__card vendor-card">
                 <div class="dashboard-vendors__summary">
                     <p><%= vendor.companyName %></p>
                     <p><%= vendor.contactName %></p>
-                    <p><%= vendor.contactNumber %></p>
+                    <p>
+                        <a href="tel:<%= vendor.contactNumber %>" class="phoneNumber">
+                            <%= vendor.contactNumber %>
+                        </a>
+                    </p>
                     <p><%= vendor.email %></p>
 
-                    <p><a href="/vendors/<%= vendor._id %>">More details</a></p>
+                    <p><a href="/vendors/<%= vendor._id %>" class="detail-link">More details</a></p>
                 </div>
             </div>
             <% }) %>
         </div>
         <% }) %>
 
+        <% if (whoseVendors === "mine") { %>
         <a href="/vendors/new"><button class="add-btn">+</button></a>
+        <% } %>
     </div>
 </main>
 

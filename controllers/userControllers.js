@@ -22,6 +22,7 @@ exports.showDashboard = async (req, res) => {
         const vendorObj = createVendorObj(vendors);
 
         res.render("users/dashboard", {
+            whoseVendors,
             vendorObj
         });
     } catch (err) {

@@ -2,20 +2,27 @@
 
 <main>
     <div class="container friends">
-        <h2>Friends</h2>
-        <a href="/users/friends?show=friends">Friends</a>
-        <a href="/users/friends?show=followers">Followers</a>
+        <div class="friends-header">
+            <h2>Friends</h2>
+            <a class="tab-bar__link <%- show === "friends" ? "tab-bar__link--active" : "" %>"
+                href="/users/friends?show=friends">Following</a>
+            <a class="tab-bar__link <%- show === "followers" ? "tab-bar__link--active" : "" %>"
+                href="/users/friends?show=followers">Followers</a>
+        </div>
 
         <% friends.forEach(friend => { %>
         <div class="friend">
-            <%= friend %>
+            <%= friend.email %>
             <form action="/users/friends?_method=DELETE" method="POST">
-                <input type="hidden" name="email" value="<%= friend %>">
-                <button type="submit">Delete</button>
+                <input type="hidden" name="email" value="<%= friend.email %>">
+                <button type="submit">Remove</button>
             </form>
         </div>
         <% }) %>
+
+        <% if (show === "friends") { %>
         <a href="/users/friends/new"><button class="add-btn">+</button></a>
+        <% } %>
     </div>
 </main>
 

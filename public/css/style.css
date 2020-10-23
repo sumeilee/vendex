@@ -1,4 +1,5 @@
 body {
+    --theme-base-color:  #f9dc5c;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -15,8 +16,8 @@ body {
 header, footer {
     align-items: center;
     box-sizing: border-box;
-    // background-color: #f9dc5c;
-    background-color: lightgrey;
+    background-color: #f9dc5c;
+    // background-color: lightgrey;
     flex: none;
     display: flex; 
 }
@@ -32,7 +33,7 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px 40px;
+    // padding: 20px 40px;
     position: relative;
 }
 
@@ -86,59 +87,122 @@ label {
     margin: 5px;
 }
 
+button {
+    cursor: pointer;
+}
+
 .container {
+    box-sizing: border-box;
+    height: 100%;
     max-width: 650px;
+    padding: 20px 40px;
     width: 100%;
     position: relative;
+}
+
+.container.friends {
+    max-width: 400px;
+}
+
+.tab-bar {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 20px 0;
+}
+
+.friends-header,
+.vendors-header {
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin: 10px 0;
+    width: 100%;
+}
+
+.tab-bar__link {
+    margin: 10px 10px 10px 0;
+}
+
+.tab-bar__link--active {
+    text-decoration: underline;
+}
+
+// .tab-bar__btn {
+//     border: 1px solid lightgrey;
+//     border-radius: 10px;
+//     margin-right: 20px;
+//     padding: 10px 15px;
+//     text-align: center;
+//     width: 100px;
+// }
+
+// .tab-bar__btn--active {
+//     background-color: #f9dc5c;
+// }
+
+.vendor-header p {
+    margin: 10px 0;
+}
+
+/* FRIENDS */
+
+.friend {
+    align-items: center;
+    display: flex;
+    flex-flow: row-wrap;
+    justify-content: space-between;
+    margin: 10px 0;
+    max-width: 400px;
+    width: 100%;
 }
 
 /* NAV BAR */
 
 .navbar {
+    align-items: center;
     display: flex;
     position: relative;
     width: 100%;
 }
 
 .navbar__links {
+    align-items: center;
+    box-sizing: border-box;
     display: none;
-}
-
-.navbar__links ul {
-    display: flex;
-    margin: 0;
-    padding: 0;
     position: absolute;
     right: 10px;
 }
 
-.navbar button {
-    background-color: lightgrey;
-    cursor: pointer;
+.navbar__logo {
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 10px 15px;
+}
+
+.navbar__link {
+    background-color: #f9dc5c;    
+    border: none;
+    margin: 10px 5px;
+    padding: 10px;
 }
 
 /* SIDE NAV */
 
 .navbar__links.responsive {
+    background-color: #f9dc5c;    
     display: flex;
-    margin-right: -30px;
+    flex-flow: column wrap;
+    margin-right: -20px;
     right: 0;
     position: absolute;
-    top: 60px;
+    top: 70px;
     width: 200px;
     z-index: 1;
-}
-
-.navbar__links.responsive ul {
-    background-color: lightgrey;
-    flex-flow: column wrap;
-    padding: 10px;
-}
-
-.navbar__links.responsive li {
-    height: 30px;
-    margin: 0;
-    padding: 10px;
 }
 
 #hamburger-icon {
@@ -268,9 +332,9 @@ textarea {
     cursor: pointer;
 }
 
-.btn-active {
-    background-color: yellow;
-}
+// .btn-active {
+//     background-color: yellow;
+// }
 
 /* LOGIN FORM */
 
@@ -335,16 +399,37 @@ textarea {
     width: 100%;
 }
 
+.vendor-header {
+    font-size: 1.25rem;
+    width: 100%;
+}
+
+.vendor-card {
+    border: none;
+    width: 100%;
+    padding: 5px;
+}
+
+p {
+    margin: 10px 0;
+}
+
 /* ADD BUTTON */
 
 .add-btn {
+    background-color: var(--theme-base-color);
     border: none;
     border-radius: 50%;
+    font-size: 1.5rem;
     height: 50px;
     position: absolute;
     top: 10px;
     right: 10px;
     width: 50px;
+}
+
+.detail-link {
+    color: darkorange;
 }
 
 /* MEDIA QUERIES */
@@ -355,7 +440,13 @@ textarea {
     }
 
     .navbar__links {
+        align-items: center;
         display: flex;
+        flex-flow: row wrap;
+        margin: 0;
+        position: absolute;
+        right: 10px;
+        width: auto;
     }
 
     .form-section__col {
@@ -409,6 +500,10 @@ textarea {
     .dashboard-vendors__card {
         margin: 10px;
         width: 250px;
+    }
+
+    .vendor-card {
+        width: 200px;
     }
 
 }

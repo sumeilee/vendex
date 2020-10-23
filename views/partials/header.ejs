@@ -20,23 +20,21 @@
 		<nav class="navbar">
 			<a href="/" class="navbar__logo">Logo</a>
 			<div class="navbar__links">
-				<ul>
-					<li><a href="/vendors">Browse Vendors</a></li>
-					<% if (!user) { %>
-					<li><a href="/login">Log In</a></li>
-					<li><a href="/signup">Sign Up</a></li>
-					<% } else { %>
-					<li><a href="/users/friends">Friends</a></li>
-					<li><a href="/users/dashboard">Dashboard</a></li>
-					<li>
-						<form action="/logout" method="POST">
-							<button class="navbar__btn" type="submit">Log Out</a>
-						</form>
-					</li>
-					<% } %>
+				<% if (!user) { %>
+				<a href="/vendors" class="navbar__link">Browse Vendors</a>
+				<a class="navbar__link" href="/login">Log In</a>
+				<a class="navbar__link" href="/signup">Sign Up</a>
+				<% } else { %>
+				<a class="navbar__link" href="/users/dashboard">Vendors</a>
+				<a class="navbar__link" href="/users/friends">Friends</a>
 
-				</ul>
+				<form action="/logout" method="POST">
+					<button class="navbar__link" type="submit">Log Out</a>
+				</form>
+
+				<% } %>
 			</div>
+
 			<a href="javascript:void(0);" id="hamburger-icon" onclick="toggleSideMenu();">
 				<i class="fas fa-bars"></i>
 			</a>

@@ -4,16 +4,20 @@
     <div class="container public">
         <div class="public-vendors">
             <% Object.keys(vendorObj).forEach(vendorType => { %>
-            <h4 class="public-vendors__header"><%= vendorType %></h4>
+            <div class="vendor-header">
+                <p><%= vendorType %></p>
+                <!-- <h4 class="public-vendors__header"><%= vendorType %></h4> -->
+            </div>
+
             <% vendorObj[vendorType].forEach(vendor => { %>
-            <div class="public-vendors__card">
+            <div class="public-vendors__card vendor-card">
                 <div class="public-vendors__summary">
                     <p><%= vendor.companyName %></p>
                     <p><%= vendor.contactName %></p>
-                    <p><%= vendor.contactNumber %></p>
+                    <p><a href="tel:<%= vendor.contactNumber %>" class="phoneNumber"><%= vendor.contactNumber %></a></p>
                     <p><%= vendor.email %></p>
 
-                    <p><a href="/vendors/<%= vendor._id %>">More details</a></p>
+                    <p><a href="/vendors/<%= vendor._id %>" class="detail-link">More details</a></p>
                 </div>
             </div>
             <% }) %>

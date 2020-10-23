@@ -9,13 +9,14 @@ exports.showFriends = async (req, res) => {
     try {
         if (show === "friends") {
             const user = await User.findOne({ _id }).populate("friends", "email");
-            friends = user.friends.map(friend => friend.email);
+            friends = user.friends.map(({ email }) => ({ email }));
         } else {
             const user = await User.findOne({ _id }).populate("followers", "email");
-            friends = user.followers.map(follower => follower.email);
+            friends = user.followers.map(({ email }) => ({ email }));
         }
 
         res.render("./users/friends/index", {
+            show,
             friends
         });
     } catch (err) {

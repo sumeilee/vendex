@@ -3,6 +3,9 @@
 <main>
     <div class="container dashboard">
         <h3 class="dashboard__header">My Vendors</h3>
+        <a href="/users/dashboard?vendors=mine">Mine</a>
+        <a href="/users/dashboard?vendors=friends">Friends</a>
+
         <% Object.keys(vendorObj).forEach(vendorType => { %>
         <div class="dashboard-vendors">
             <h5 class="dashboard-vendors__header"><%= vendorType %></h5>

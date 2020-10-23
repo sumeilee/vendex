@@ -6,10 +6,10 @@ body {
     font-family: 'Montserrat', sans-serif;
 
     // prevent text in other cells from being highlighted when clicking div
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+    // user-select: none;
+    // -webkit-user-select: none;
+    // -moz-user-select: none;
+    // -ms-user-select: none;
 }
 
 header, footer {
@@ -266,6 +266,10 @@ textarea {
 
 .checkbox-label {
     cursor: pointer;
+}
+
+.btn-active {
+    background-color: yellow;
 }
 
 /* LOGIN FORM */

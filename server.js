@@ -10,6 +10,7 @@ const app = express();
 const port = 5000;
 
 app.set("view engine", "ejs");
+app.use(methodOverride("_method"));
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -79,13 +80,19 @@ app.get("/vendors/:id", vendorControllers.showVendorProfile);
 app.get(
     "/users/dashboard",
     authMiddleware.authenticatedOnly,
-    userControllers.showDashbaord
+    userControllers.showDashboard
 );
 
 app.get(
     "/users/friends",
     authMiddleware.authenticatedOnly,
     friendControllers.showFriends
+);
+
+app.delete(
+    "/users/friends",
+    authMiddleware.authenticatedOnly,
+    friendControllers.deleteFriend
 );
 
 app.get(

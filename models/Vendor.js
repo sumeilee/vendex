@@ -20,7 +20,7 @@ const vendorSchema = new mongoose.Schema({
     facebook: String,
     instagram: String,
     otherUrl: String,
-    user: {
+    createdBy: {
         type: mongoose.Schema.ObjectId,
         ref: "User"
     },

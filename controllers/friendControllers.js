@@ -46,11 +46,11 @@ exports.addFriend = async (req, res) => {
 
         if (!me.friends.includes(friend._id)) {
             me.friends.push(friend._id);
-            me.save();
+            await me.save();
 
             if (!friend.followers.includes(me._id)) {
                 friend.followers.push(me._id);
-                friend.save();
+                await friend.save();
             }
         } else {
             console.log("friend already in list");
@@ -73,11 +73,11 @@ exports.deleteFriend = async (req, res) => {
 
         console.log("deleting friend");
         user.friends.splice(user.friends.indexOf(friend._id), 1);
-        user.save();
+        await user.save();
 
         console.log("deleting follower");
         friend.followers.splice(friend.followers.indexOf(user._id), 1);
-        friend.save();
+        await friend.save();
 
         res.redirect("/users/me/friends");
     } catch (err) {

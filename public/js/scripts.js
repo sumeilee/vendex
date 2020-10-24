@@ -19,6 +19,8 @@ body.addEventListener("click", (e) => {
 body.addEventListener("submit", (e) => {
     if (e.target.id === "vendor-form") {
         handleVendorFormSubmit(e);
+    } else if (e.target.id === "add-friends-vendor-form") {
+        handleAddFriendsVendor(e);
     }
 })
 
@@ -96,4 +98,25 @@ const makeActive = (target, activeClassName) => {
 
     console.log(target);
     target.classList.add(activeClassName);
+}
+
+const handleAddFriendsVendor = async (e) => {
+    e.preventDefault();
+
+    const data = Object.fromEntries(new FormData(e.target));
+
+    try {
+        const response = await axios.post("/users/me/vendors", {
+            vendorId: data.vendorId
+        });
+
+        if (response.status === 200) {
+            console.log("successfully added friends vendor");
+        }
+
+        // window.location = "/users/me/vendors?whose=friends";
+    } catch (err) {
+        console.log(err);
+        // window.location = "/users/me/vendors?whose=friends";
+    }
 }

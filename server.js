@@ -83,6 +83,18 @@ app.get(
     userControllers.showUserVendors
 );
 
+app.post(
+    "/users/me/vendors",
+    authMiddleware.authenticatedOnly,
+    userControllers.addUserVendor
+);
+
+app.delete(
+    "/users/me/vendors",
+    authMiddleware.authenticatedOnly,
+    userControllers.removeUserVendor
+);
+
 // USER FRIENDS ROUTES
 app.get(
     "/users/me/friends",

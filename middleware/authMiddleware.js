@@ -9,7 +9,7 @@ exports.authenticatedOnly = (req, res, next) => {
 
 exports.guestOnly = (req, res, next) => {
     if (req.session && req.session.user) {
-        res.redirect("/users/dashboard");
+        res.redirect("/users/me/vendors");
         return;
     }
 

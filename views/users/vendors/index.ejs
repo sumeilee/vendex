@@ -1,0 +1,44 @@
+<%- include("./../../partials/header"); %>
+
+<main>
+    <div class="container dashboard">
+        <div class="vendors-header">
+            <h2>Vendors</h2>
+            <a class="tab-bar__link <%- whose === "mine" ? "tab-bar__link--active" : "" %>"
+                href="/users/me/vendors?whose=mine">Mine</a>
+            <a class="tab-bar__link <%- whose === "friends" ? "tab-bar__link--active" : "" %>"
+                href="/users/me/vendors?whose=friends">Friends'</a>
+        </div>
+
+        <% Object.keys(vendorObj).forEach(vendorType => { %>
+        <div class="dashboard-vendors">
+            <div class="vendor-header">
+                <p><%= vendorType %></p>
+                <!-- <h5 class="dashboard-vendors__header"><%= vendorType %></h5> -->
+            </div>
+            <% vendorObj[vendorType].forEach(vendor => { %>
+            <div class="dashboard-vendors__card vendor-card">
+                <div class="dashboard-vendors__summary">
+                    <p><%= vendor.companyName %></p>
+                    <p><%= vendor.contactName %></p>
+                    <p>
+                        <a href="tel:<%= vendor.contactNumber %>" class="phoneNumber">
+                            <%= vendor.contactNumber %>
+                        </a>
+                    </p>
+                    <p><%= vendor.email %></p>
+
+                    <p><a href="/vendors/<%= vendor._id %>" class="detail-link">More details</a></p>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+        <% }) %>
+
+        <% if (whose === "mine") { %>
+        <a href="/vendors/new"><button class="add-btn">+</button></a>
+        <% } %>
+    </div>
+</main>
+
+<%- include("./../../partials/footer"); %>

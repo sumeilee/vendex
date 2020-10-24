@@ -31,7 +31,7 @@ exports.signup = async (req, res) => {
             email: user.email
         };
 
-        res.redirect("/users/dashboard");
+        res.redirect("/users/me/vendors");
     } catch (err) {
         console.log(err);
         res.redirect("/signup");
@@ -61,7 +61,7 @@ exports.login = async (req, res) => {
                 email: user.email
             };
 
-            res.redirect("/users/dashboard");
+            res.redirect("/users/me/vendors");
         } else {
             res.redirect("/login");
         }

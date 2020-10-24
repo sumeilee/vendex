@@ -6,7 +6,7 @@ exports.showNewVendorForm = (req, res) => {
     res.render("./vendors/new");
 }
 
-exports.createUserVendor = async (req, res) => {
+exports.createVendor = async (req, res) => {
     try {
         const _id = req.session.user._id;
         const vendor = await Vendor.create({
@@ -35,7 +35,7 @@ exports.showVendorProfile = async (req, res) => {
         })
     } catch (err) {
         console.log(err);
-        res.redirect("/users/dashboard");
+        res.redirect("/users/me/vendors");
     }
 }
 

@@ -71,7 +71,7 @@ const handleVendorFormSubmit = async (e) => {
     console.log(doc);
 
     try {
-        const response = await axios.post("/vendors/new", doc);
+        const response = await axios.post("/vendors", doc);
 
         window.location = response.data.redirect;
     } catch (err) {

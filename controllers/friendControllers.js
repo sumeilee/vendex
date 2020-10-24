@@ -21,7 +21,7 @@ exports.showFriends = async (req, res) => {
         });
     } catch (err) {
         console.log(err);
-        res.redirect("/users/dashboard");
+        res.redirect("/users/me/vendors");
     }
 }
 
@@ -40,7 +40,7 @@ exports.addFriend = async (req, res) => {
 
         if (!friend) {
             console.log("Friend not found");
-            res.redirect("/users/friends");
+            res.redirect("/users/me/friends");
             return;
         }
 
@@ -56,10 +56,10 @@ exports.addFriend = async (req, res) => {
             console.log("friend already in list");
         }
 
-        res.redirect("/users/friends");
+        res.redirect("/users/me/friends");
     } catch (err) {
         console.log(err);
-        res.redirect("/users/friends");
+        res.redirect("/users/me/friends");
     }
 }
 
@@ -79,10 +79,10 @@ exports.deleteFriend = async (req, res) => {
         friend.followers.splice(friend.followers.indexOf(user._id), 1);
         friend.save();
 
-        res.redirect("/users/friends");
+        res.redirect("/users/me/friends");
     } catch (err) {
         console.log(err);
-        res.redirect("/users/friends");
+        res.redirect("/users/me/friends");
     }
 }
 

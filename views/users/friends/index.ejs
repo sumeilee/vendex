@@ -5,15 +5,15 @@
         <div class="friends-header">
             <h2>Friends</h2>
             <a class="tab-bar__link <%- show === "friends" ? "tab-bar__link--active" : "" %>"
-                href="/users/friends?show=friends">Following</a>
+                href="/users/me/friends?show=friends">Following</a>
             <a class="tab-bar__link <%- show === "followers" ? "tab-bar__link--active" : "" %>"
-                href="/users/friends?show=followers">Followers</a>
+                href="/users/me/friends?show=followers">Followers</a>
         </div>
 
         <% friends.forEach(friend => { %>
         <div class="friend">
             <%= friend.email %>
-            <form action="/users/friends?_method=DELETE" method="POST">
+            <form action="/users/me/friends?_method=DELETE" method="POST">
                 <input type="hidden" name="email" value="<%= friend.email %>">
                 <button type="submit">Remove</button>
             </form>
@@ -21,7 +21,7 @@
         <% }) %>
 
         <% if (show === "friends") { %>
-        <a href="/users/friends/new"><button class="add-btn">+</button></a>
+        <a href="/users/me/friends/new"><button class="add-btn">+</button></a>
         <% } %>
     </div>
 </main>

@@ -64,49 +64,49 @@ app.get("/vendors", vendorControllers.showVendors);
 
 app.get(
     "/vendors/new",
-    // authMiddleware.authenticatedOnly,
+    authMiddleware.authenticatedOnly,
     vendorControllers.showNewVendorForm
 );
 
 app.post(
-    "/vendors/new",
-    // authMiddleware.authenticatedOnly,
-    vendorControllers.createUserVendor
+    "/vendors",
+    authMiddleware.authenticatedOnly,
+    vendorControllers.createVendor
 );
 
 app.get("/vendors/:id", vendorControllers.showVendorProfile);
 
 // USER ROUTES
 app.get(
-    "/users/dashboard",
+    "/users/me/vendors",
     authMiddleware.authenticatedOnly,
-    userControllers.showDashboard
+    userControllers.showUserVendors
 );
 
+// USER FRIENDS ROUTES
 app.get(
-    "/users/friends",
+    "/users/me/friends",
     authMiddleware.authenticatedOnly,
     friendControllers.showFriends
 );
 
+app.post(
+    "/users/me/friends",
+    authMiddleware.authenticatedOnly,
+    friendControllers.addFriend
+);
+
 app.delete(
-    "/users/friends",
+    "/users/me/friends",
     authMiddleware.authenticatedOnly,
     friendControllers.deleteFriend
 );
 
 app.get(
-    "/users/friends/new",
+    "/users/me/friends/new",
     authMiddleware.authenticatedOnly,
     friendControllers.showFriendForm
 );
-
-app.post(
-    "/users/friends/new",
-    authMiddleware.authenticatedOnly,
-    friendControllers.addFriend
-);
-
 
 mongoose
     .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })

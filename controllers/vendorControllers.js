@@ -1,6 +1,55 @@
 const User = require("../models/User");
-const { createVendorObj, formatVendorData } = require("../scripts/utils");
+const { createVendorObj } = require("../scripts/utils");
 const Vendor = require("./../models/Vendor");
+
+const formatVendorData = (data) => {
+    const doc = {};
+    const vendorType = [];
+    const address = {};
+
+    for (key in data) {
+        if (key.startsWith("address--")) {
+            const field = key.split("--")[1];
+            address[field] = data[key];
+        } else if (key.startsWith("vendor--")) {
+            vendorType.push(data[key]);
+        } else {
+            doc[key] = data[key];
+        }
+    }
+
+    doc["vendorType"] = vendorType;
+    doc["address"] = address;
+
+    return doc;
+}
+
+const isValidSubmission = (data) => {
+    let isValid = false;
+
+    const contactInfo = [
+        "contactNumber",
+        "email",
+        "url",
+        "facebook",
+        "instagram",
+        "otherUrl",
+        "address--addrLine1",
+        "address--addrLine2"
+    ];
+
+    if (Object.keys(data).some(field => field.includes("vendor--"))) {
+        if (data.companyName || data.contactName) {
+            contactInfo.forEach(info => {
+                if (data[info]) {
+                    isValid = true;
+                }
+            });
+        }
+    }
+
+    return isValid;
+}
 
 exports.showNewVendorForm = (req, res) => {
     res.render("./vendors/new");
@@ -23,7 +72,15 @@ exports.showEditVendorForm = async (req, res) => {
 exports.updateVendor = async (req, res) => {
     try {
         const _id = req.params.id;
-        const vendorObj = formatVendorData(req.body);
+        const data = req.body;
+
+        if (!isValidSubmission(data)) {
+            console.log("insufficient vendor data submitted");
+            res.redirect("/users/me/vendors");
+            return;
+        }
+
+        const vendorObj = formatVendorData(data);
 
         const vendor = await Vendor.findOne({ _id });
 
@@ -45,7 +102,15 @@ exports.updateVendor = async (req, res) => {
 exports.createVendor = async (req, res) => {
     try {
         const _id = req.session.user._id;
-        const vendorObj = formatVendorData(req.body);
+        const data = req.body;
+
+        if (!isValidSubmission(data)) {
+            console.log("insufficient vendor data submitted");
+            res.redirect("/users/me/vendors");
+            return;
+        }
+
+        const vendorObj = formatVendorData(data);
 
         const vendor = await Vendor.create({
             ...vendorObj,

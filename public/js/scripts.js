@@ -17,11 +17,12 @@ body.addEventListener("click", (e) => {
 });
 
 body.addEventListener("submit", (e) => {
-    if (e.target.id === "vendor-form") {
-        handleVendorFormSubmit(e);
-    } else if (e.target.id === "add-friends-vendor-form") {
+    if (e.target.id === "add-friends-vendor-form") {
         handleAddFriendsVendor(e);
     }
+    // if (e.target.id === "vendor-form") {
+    //     handleVendorFormSubmit(e);
+    // }
 })
 
 const handleToggleSection = (target) => {
@@ -46,13 +47,8 @@ const handleToggleSection = (target) => {
     }
 }
 
-const handleVendorFormSubmit = async (e) => {
-    e.preventDefault();
-
-    const data = Object.fromEntries(new FormData(e.target));
-
+const formatVendorData = (data) => {
     const doc = {};
-
     const vendorType = [];
     const address = {};
 
@@ -70,7 +66,29 @@ const handleVendorFormSubmit = async (e) => {
     doc["vendorType"] = vendorType;
     doc["address"] = address;
 
-    console.log(doc);
+    return doc;
+}
+
+const handleEditVendorFormSubmit = async (e) => {
+    e.preventDefault();
+
+    const data = Object.fromEntries(new FormData(e.target));
+    const doc = formatVendorData(data);
+
+    try {
+        const response = await axios.update("/vendors", doc);
+
+        window.location = response.data.redirect;
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+const handleVendorFormSubmit = async (e) => {
+    e.preventDefault();
+
+    const data = Object.fromEntries(new FormData(e.target));
+    const doc = formatVendorData(data);
 
     try {
         const response = await axios.post("/vendors", doc);

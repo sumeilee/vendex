@@ -29,21 +29,27 @@
                     <p><%= vendor.email %></p>
 
                     <p><a href="/vendors/<%= vendor._id %>" class="detail-link">More details</a></p>
-                    <% if (whose === "friends") { %>
-                    <form action="/users/me/vendors" method="POST">
-                        <input type="hidden" name="vendorId" value="<%= vendor._id %>">
-                        <button type="submit">Add to My List</button>
-                    </form>
-                    <!-- <form id="add-friends-vendor-form">
-                        <input type="hidden" name="vendorId" value="<%= vendor._id %>">
-                        <button type="submit">Add to My List</button>
-                    </form> -->
-                    <% } else { %>
-                    <form action="/users/me/vendors?_method=DELETE" method="POST">
-                        <input type="hidden" name="vendorId" value="<%= vendor._id %>">
-                        <button type="submit">Remove</button>
-                    </form>
-                    <% } %>
+                    <div class="vendor-btns">
+                        <% if (whose === "friends") { %>
+                        <form action="/users/me/vendors" method="POST">
+                            <input type="hidden" name="vendorId" value="<%= vendor._id %>">
+                            <button type="submit">Add to My List</button>
+                        </form>
+                        <!-- <form id="add-friends-vendor-form">
+                                <input type="hidden" name="vendorId" value="<%= vendor._id %>">
+                                <button type="submit">Add to My List</button>
+                            </form> -->
+                        <% } else { %>
+                        <form action="/vendors/<%= vendor._id %>/edit" method="GET">
+                            <button type="submit">Edit</button>
+                        </form>
+                        <form action="/users/me/vendors?_method=DELETE" method="POST">
+                            <input type="hidden" name="vendorId" value="<%= vendor._id %>">
+                            <button type="submit">Remove</button>
+                        </form>
+                        <% } %>
+                    </div>
+
                 </div>
             </div>
             <% }) %>

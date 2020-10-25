@@ -1,0 +1,135 @@
+<%- include("./../partials/header"); %>
+
+<main>
+    <div class="container">
+        <div class="form__header">
+            <h2>Update Vendor Details</h2>
+        </div>
+
+        <form class="form__group" action="/vendors/<%= vendor._id %>?_method=PATCH" method="POST" id="edit-vendor-form"
+            autocomplete="off">
+            <div class="form-section" id="section--vendor">
+                <h3 class="form-section__header">Vendor Type</h3>
+
+                <% const vendorTypes = ["Aircon Servicing", "Cleaner", "Electrician", "Gardener", "Locksmith", "Plumber"]; %>
+                <% if (vendorTypes.length > 2) { %>
+                <div class="column-wrap">
+                    <% } %>
+
+                    <% vendorTypes.forEach((vendorType, idx) => { %>
+                    <% const slug = vendorType.toLowerCase().replace(" ", "_"); %>
+
+                    <div class="form-input--checkbox">
+                        <input class="checkbox-input" type="checkbox" name="<%= `vendor--${slug}` %>"
+                            id="<%= `${slug}` %>" value="<%= `${vendorType}` %>"
+                            <% if (vendor.vendorType.includes(vendorType)) { %> checked <% } %> />
+                        <label class="checkbox-label" for="<%= `${slug}` %>"><%= vendorType %></label>
+                    </div>
+                    <% }); %>
+                    <% if (vendorTypes.length > 2) { %>
+                </div>
+                <% } %>
+            </div>
+
+            <div class="form-section">
+                <h3 class="form-section__header">Basic Information</h3>
+
+                <div class="form-section__col">
+                    <div class="form-input">
+                        <label class="form-input__label" for="companyName">Company Name</label>
+                        <input class="form-input__input" type="text" name="companyName" id="companyName"
+                            value="<%= vendor.companyName %>" />
+                    </div>
+
+                    <div class="form-input">
+                        <label class="form-input__label" for="contactName">Contact Name</label>
+                        <input class="form-input__input" type="text" name="contactName" id="contactName"
+                            value="<%= vendor.contactName %>" />
+                    </div>
+                </div>
+                <div class="form-section__col">
+                    <div class="form-input">
+                        <label class="form-input__label" for="contactNumber">Contact Number</label>
+                        <input class="form-input__input" type="text" name="contactNumber" id="contactNumber"
+                            value="<%= vendor.contactNumber %>" />
+                    </div>
+
+                    <div class="form-input">
+                        <label class="form-input__label" for="email">Email</label>
+                        <input class="form-input__input" type="text" name="email" id="email"
+                            value="<%= vendor.email %>" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3 class="form-section__header">Websites</h3>
+                <div class="form-section__col">
+                    <div class="form-input">
+                        <label class="form-input__label" for="url">Website</label>
+                        <input class="form-input__input" type="text" name="url" id="url" value="<%= vendor.url %>" />
+                    </div>
+                    <div class="form-input">
+                        <label class="form-input__label" for="facebook">Facebook</label>
+                        <input class="form-input__input" type="text" name="facebook" id="facebook"
+                            value="<%= vendor.facebook %>" />
+                    </div>
+                </div>
+                <div class="form-section__col">
+                    <div class="form-input">
+                        <label class="form-input__label" for="instagram">Instagram</label>
+                        <input class="form-input__input" type="text" name="instagram" id="instagram"
+                            value="<%= vendor.instagram %>" />
+                    </div>
+                    <div class="form-input">
+                        <label class="form-input__label" for="otherUrl">Other URL</label>
+                        <input class="form-input__input" type="text" name="otherUrl" id="otherUrl"
+                            value="<%= vendor.otherUrl %>" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3 class="form-section__header">Address</h3>
+                <div class="form-section__col">
+                    <div class="form-input">
+                        <label class="form-input__label" for="addrLine1">Address Line 1</label>
+                        <input class="form-input__input" type="text" name="address--addrLine1" id="addrLine1"
+                            value="<%= vendor.address.addrLine1 %>" />
+                    </div>
+                    <div class="form-input">
+                        <label class="form-input__label" for="addrLine2">Address Line 2</label>
+                        <input class="form-input__input" type="text" name="address--addrLine2" id="addrLine2"
+                            value="<%= vendor.address.addrLine2 %>" />
+                    </div>
+                    <div class="form-input">
+                        <label class="form-input__label" for="city">City</label>
+                        <input class="form-input__input" type="text" name="address--city" id="city"
+                            value="<%= vendor.address.city %>" />
+                    </div>
+                </div>
+                <div class="form-section__col">
+                    <div class="form-input">
+                        <label class="form-input__label" for="state">State</label>
+                        <input class="form-input__input" type="text" name="address--state" id="state"
+                            value="<%= vendor.address.state %>" />
+                    </div>
+                    <div class="form-input">
+                        <label class="form-input__label" for="postalCode">Postal Code</label>
+                        <input class="form-input__input" type="text" name="address--postalCode" id="postalCode"
+                            value="<%= vendor.address.postalCode %>" />
+                    </div>
+                    <div class="form-input">
+                        <label class="form-input__label" for="country">Country</label>
+                        <input class="form-input__input" type="text" name="address--country" id="country"
+                            value="<%= vendor.address.country %>" />
+                    </div>
+                </div>
+            </div>
+
+            <button class="form-btn" type="submit">Update</button>
+        </form>
+    </div>
+</main>
+
+<%- include("./../partials/footer"); %>

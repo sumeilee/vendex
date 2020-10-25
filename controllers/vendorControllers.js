@@ -1,28 +1,65 @@
 const User = require("../models/User");
-const { createVendorObj } = require("../scripts/utils");
+const { createVendorObj, formatVendorData } = require("../scripts/utils");
 const Vendor = require("./../models/Vendor");
 
 exports.showNewVendorForm = (req, res) => {
     res.render("./vendors/new");
 }
 
+exports.showEditVendorForm = async (req, res) => {
+    const _id = req.params.id;
+
+    try {
+        const vendor = await Vendor.findOne({ _id });
+        res.render("./vendors/edit", {
+            vendor
+        });
+    } catch (err) {
+        console.log(err);
+        res.redirect("/users/me/vendors");
+    }
+}
+
+exports.updateVendor = async (req, res) => {
+    try {
+        const _id = req.params.id;
+        const vendorObj = formatVendorData(req.body);
+
+        const vendor = await Vendor.findOne({ _id });
+
+        for (key in vendorObj) {
+            vendor[key] = vendorObj[key];
+        }
+
+        vendor.updatedAt = new Date();
+
+        vendor.save();
+
+        res.redirect("/users/me/vendors");
+    } catch (err) {
+        console.log(err);
+        res.redirect("/users/me/vendors");
+    }
+}
+
 exports.createVendor = async (req, res) => {
-    console.log("creating vendor");
     try {
         const _id = req.session.user._id;
+        const vendorObj = formatVendorData(req.body);
+
         const vendor = await Vendor.create({
-            ...req.body,
-            user: _id
+            ...vendorObj,
+            createdBy: _id
         });
 
         const user = await User.findOne({ _id });
         user.vendors.push(vendor._id);
         await user.save();
 
-        res.json({ redirect: "/users/me/vendors" });
+        res.redirect("/users/me/vendors");
     } catch (err) {
         console.log(err);
-        res.json({ redirect: "/vendors/new" });
+        res.redirect("/users/me/vendors");
     }
 }
 

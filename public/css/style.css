@@ -149,6 +149,11 @@ h2 {
     margin: 10px 0;
 }
 
+.vendor-btns {
+    display: flex;
+    flex-flow: row wrap;
+}
+
 /* FRIENDS */
 
 .friend {
@@ -504,6 +509,10 @@ p {
 
     .vendor-card {
         width: 200px;
+    }
+
+    .vendor-btns button {
+        margin-right: 5px;
     }
 
 }

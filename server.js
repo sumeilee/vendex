@@ -76,6 +76,18 @@ app.post(
 
 app.get("/vendors/:id", vendorControllers.showVendorProfile);
 
+app.patch(
+    "/vendors/:id",
+    authMiddleware.authenticatedOnly,
+    vendorControllers.updateVendor
+);
+
+app.get(
+    "/vendors/:id/edit",
+    authMiddleware.authenticatedOnly,
+    vendorControllers.showEditVendorForm
+);
+
 // USER ROUTES
 app.get(
     "/users/me/vendors",

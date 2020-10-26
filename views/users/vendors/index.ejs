@@ -1,7 +1,8 @@
 <%- include("./../../partials/header"); %>
 
-<main>
-    <div class="container dashboard">
+<main class="user-vendors">
+    <div class="user-vendors-container">
+
         <div class="vendors-header">
             <h2>Vendors</h2>
             <a class="tab-bar__link <%- whose === "mine" ? "tab-bar__link--active" : "" %>"
@@ -14,7 +15,6 @@
         <div class="dashboard-vendors">
             <div class="vendor-header">
                 <p><%= vendorType %></p>
-                <!-- <h5 class="dashboard-vendors__header"><%= vendorType %></h5> -->
             </div>
             <% vendorObj[vendorType].forEach(vendor => { %>
             <div class="dashboard-vendors__card vendor-card">

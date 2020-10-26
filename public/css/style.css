@@ -31,24 +31,21 @@ header {
     padding: 20px;
 }
 
-main {
-    display: flex;
-    flex: auto;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    // padding: 20px 40px;
-    position: relative;
-}
-
 footer {
     height: 50px;
     justify-content: center;
     width: 100%;
 }
 
+main {
+    display: flex;
+    flex-flow: row wrap;
+    flex: auto;
+}
+
 h1, h2, h3 {
     margin: 10px auto;
+    width: 100%;
 }
 
 a {
@@ -88,6 +85,7 @@ textarea:focus {
 
 textarea {
     padding: 10px;
+    width: 100%;
 }
 
 label {
@@ -99,24 +97,14 @@ button {
     cursor: pointer;
 }
 
-.container {
-    align-items: center;
-    box-sizing: border-box;
-    display: flex;
-    flex-flow: column wrap;
-    height: 100%;
-    justify-content: center;
-    max-width: 650px;
-    padding: 20px 40px;
-    width: 100%;
-    position: relative;
+p {
+    margin: 10px 0;
 }
 
 /* LANDING */
 
-.container.landing {
-    box-sizing: border-box;
-    max-width: 100%;
+.landing-container {
+    height: 100%;
     padding: 0;
     width: 100%;
 }
@@ -175,14 +163,72 @@ button {
     width: 25%;
 }
 
-.container.friends {
-    max-width: 400px;
+/* LOGIN & SIGNUP */
+
+.signup,
+.login {
+    align-items: center;
+    justify-content: center;
+    padding: 20px 40px;
 }
 
-.tab-bar {
+.signup-container,
+.login-container {
+    justify-content: center;
+}
+
+/* VENDORS */
+
+.show-vendor,
+.edit-vendor,
+.add-vendor,
+.vendors,
+.user-vendors {
+    justify-content: center;
+    padding: 20px 40px;
+}
+
+.show-vendor-container,
+.edit-vendor-container,
+.add-vendor-container,
+.vendors-container,
+.user-vendors-container {
+    justify-content: flex-start;
+    position: relative;
+}
+
+.vendor-type {
     display: flex;
     flex-flow: row wrap;
-    margin: 20px 0;
+    width: 100%;
+}
+
+.vendor-cards {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+/* FRIENDS */
+
+.friends {
+    justify-content: center;
+    padding: 20px 40px;
+}
+
+.friends-container {
+    justify-content: flex-start;
+    max-width: 400px;
+    position: relative;
+}
+
+.friend {
+    align-items: center;
+    display: flex;
+    flex-flow: row-wrap;
+    justify-content: space-between;
+    margin: 10px 0;
+    max-width: 400px;
+    width: 100%;
 }
 
 .friends-header,
@@ -192,11 +238,28 @@ button {
     flex-flow: row wrap;
     justify-content: flex-start;
     margin-bottom: 20px;
+    width: 100%;
 }
 
-h2 {
-    margin: 10px 0;
-    width: 100%;
+/* ADD FRIEND */
+
+.add-friend {
+    align-items: center;
+    justify-content: center;
+    padding: 20px 40px;
+}
+
+.add-friend-container {
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.tab-bar {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 20px 0;
 }
 
 .tab-bar__link {
@@ -216,16 +279,8 @@ h2 {
     flex-flow: row wrap;
 }
 
-/* FRIENDS */
-
-.friend {
-    align-items: center;
-    display: flex;
-    flex-flow: row-wrap;
-    justify-content: space-between;
-    margin: 10px 0;
-    max-width: 400px;
-    width: 100%;
+.vendor-btns button {
+    margin-right: 10px;
 }
 
 /* NAV BAR */
@@ -281,7 +336,9 @@ h2 {
 /* FORM STYLES */
 
 .form__header {
+    margin-bottom: 20px;
     text-align: center;
+    width: 100%;
 }
 
 .form__group {
@@ -357,10 +414,6 @@ h2 {
     margin-left: 5px;
 }
 
-textarea {
-    width: 100%;
-}
-
 .button-group--vendors {
     display: flex;
     flex-flow: row wrap;
@@ -405,17 +458,13 @@ textarea {
 
 /* LOGIN FORM */
 
+.friend-form label,
 .login-form label,
 .signup-form label {
     text-align: center;
 }
 
 /* PUBLIC VENDORS */
-
-.public {
-    max-width: 650px;
-    width: 100%;
-}
 
 .public-vendors
  {
@@ -433,18 +482,18 @@ textarea {
 .public-vendors__card {
     border: 1px solid lightgrey;
     border-radius: 10px;
-    margin: 10px 0;
+    margin-bottom: 10px;
     padding: 20px;
     width: 100%;
 }
 
 /* DASHBOARD */
 
-.dashboard {
-    max-width: 650px;
-    position: relative;
-    width: 100%;
-}
+// .dashboard {
+//     max-width: 650px;
+//     position: relative;
+//     width: 100%;
+// }
 
 .dashboard-vendors
  {
@@ -461,7 +510,7 @@ textarea {
 .dashboard-vendors__card {
     border: 1px solid lightgrey;
     border-radius: 10px;
-    margin: 10px 0;
+    margin-bottom: 10px;
     padding: 20px;
     width: 100%;
 }
@@ -475,10 +524,6 @@ textarea {
     border: none;
     width: 100%;
     padding: 5px;
-}
-
-p {
-    margin: 10px 0;
 }
 
 /* ADD BUTTON */
@@ -502,6 +547,18 @@ p {
 /* MEDIA QUERIES */
 
 @media only screen and (min-width: 600px) {
+
+    .show-vendor-container,
+    .edit-vendor-container,
+    .add-vendor-container,
+    .vendors-container,
+    .user-vendors-container {
+        width: 800px;
+    }
+    // .container {
+    //     // flex-flow: row wrap;
+    //     justify-content: flex-start;
+    // }
 
     .landing--hero__content--header {
         font-size: 2rem;
@@ -542,6 +599,7 @@ p {
         width: 90%;
     }
     
+    .friend-form,
     .login-form,
     .signup-form {
         width: 300px;
@@ -566,7 +624,6 @@ p {
     }
 
     .public-vendors__card {
-        margin: 10px;
         width: 250px;
     }
 
@@ -585,9 +642,4 @@ p {
     .vendor-card {
         width: 200px;
     }
-
-    .vendor-btns button {
-        margin-right: 5px;
-    }
-
 }

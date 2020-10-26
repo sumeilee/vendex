@@ -1,26 +1,32 @@
 <%- include("./../partials/header"); %>
 
-<main>
-    <div class="container public">
+<main class="vendors">
+    <div class="vendors-container">
         <div class="public-vendors">
             <% Object.keys(vendorObj).forEach(vendorType => { %>
-            <div class="vendor-header">
-                <p><%= vendorType %></p>
-                <!-- <h4 class="public-vendors__header"><%= vendorType %></h4> -->
-            </div>
-
-            <% vendorObj[vendorType].forEach(vendor => { %>
-            <div class="public-vendors__card vendor-card">
-                <div class="public-vendors__summary">
-                    <p><%= vendor.companyName %></p>
-                    <p><%= vendor.contactName %></p>
-                    <p><a href="tel:<%= vendor.contactNumber %>" class="phoneNumber"><%= vendor.contactNumber %></a></p>
-                    <p><%= vendor.email %></p>
-
-                    <p><a href="/vendors/<%= vendor._id %>" class="detail-link">More details</a></p>
+            <div class="vendor-type">
+                <div class="vendor-header">
+                    <p><%= vendorType %></p>
                 </div>
+                <div class="vendor-cards">
+                    <% vendorObj[vendorType].forEach(vendor => { %>
+                    <div class="public-vendors__card vendor-card">
+                        <div class="public-vendors__summary">
+                            <p><%= vendor.companyName %></p>
+                            <p><%= vendor.contactName %></p>
+                            <p><a href="tel:<%= vendor.contactNumber %>"
+                                    class="phoneNumber"><%= vendor.contactNumber %></a>
+                            </p>
+                            <p><%= vendor.email %></p>
+
+                            <p><a href="/vendors/<%= vendor._id %>" class="detail-link">More details</a></p>
+                        </div>
+                    </div>
+                    <% }) %>
+                </div>
+
             </div>
-            <% }) %>
+
             <% }) %>
         </div>
 

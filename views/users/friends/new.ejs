@@ -1,19 +1,21 @@
 <%- include("./../../partials/header"); %>
 
-<main>
-    <div class="form__header">
-        <p>Follow Friend</p>
-    </div>
-
-    <form class="form__group" id="friend-form" action="/users/friends" method="POST">
-        <div class="form-input">
-            <label class="form-input__label" for="email">Friend's Email</label>
-            <input class="form-input__input" type="email" name="email" id="email" required autocomplete="off"
-                autofocus />
+<main class="add-friend">
+    <div class="add-friend-container">
+        <div class="form__header">
+            <p>Follow a friend's vendor network</p>
         </div>
 
-        <button class="form-btn" type="submit">Find Friend</button>
-    </form>
+        <form class="form__group friend-form" id="friend-form" action="/users/friends" method="POST">
+            <div class="form-input">
+                <label class="form-input__label" for="email">Friend's Email</label>
+                <input class="form-input__input" type="email" name="email" id="email" required autocomplete="off"
+                    autofocus />
+            </div>
+
+            <button class="form-btn" type="submit">Follow</button>
+        </form>
+    </div>
 </main>
 
 <%- include("./../../partials/footer"); %>

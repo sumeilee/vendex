@@ -1,32 +1,33 @@
 <%- include("./partials/header"); %>
 
 <main>
-    <div class="form__header">
-        <h1>Join us</h1>
-        <p>Sign up for an account</p>
+    <div class="container signup">
+        <div class="form__header">
+            <p>Sign up for an account</p>
+        </div>
+
+        <form class="form__group signup-form" action="/signup" method="POST">
+            <div class="form-input">
+                <label class="form-input__label" for="email">Email</label>
+                <input class="form-input__input" type="email" name="email" id="email" required autocomplete="off"
+                    autofocus />
+            </div>
+
+            <div class="form-input">
+                <label class="form-input__label" for="password">Password</label>
+                <input class="form-input__input" type="password" name="password" id="password" required
+                    autocomplete="off" />
+            </div>
+
+            <div class="form-input">
+                <label class="form-input__label" for="passwordConfirm">Confirm Password</label>
+                <input class="form-input__input" type="password" name="passwordConfirm" id="passwordConfirm" required
+                    autocomplete="off" />
+            </div>
+
+            <button class="form-btn" type="submit">Sign Up</button>
+        </form>
     </div>
-
-    <form class="form__group signup-form" action="/signup" method="POST">
-        <div class="form-input">
-            <label class="form-input__label" for="email">Email</label>
-            <input class="form-input__input" type="email" name="email" id="email" required autocomplete="off"
-                autofocus />
-        </div>
-
-        <div class="form-input">
-            <label class="form-input__label" for="password">Password</label>
-            <input class="form-input__input" type="password" name="password" id="password" required
-                autocomplete="off" />
-        </div>
-
-        <div class="form-input">
-            <label class="form-input__label" for="passwordConfirm">Confirm Password</label>
-            <input class="form-input__input" type="password" name="passwordConfirm" id="passwordConfirm" required
-                autocomplete="off" />
-        </div>
-
-        <button class="form-btn" type="submit">Sign Up</button>
-    </form>
 </main>
 
 <%- include("./partials/footer"); %>

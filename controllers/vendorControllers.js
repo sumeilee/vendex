@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const { createVendorObj } = require("../scripts/utils");
 const Vendor = require("./../models/Vendor");
+const VendorReview = require('./../models/VendorReview');
 
 const formatVendorData = (data) => {
     const doc = {};
@@ -20,6 +21,30 @@ const formatVendorData = (data) => {
 
     doc["vendorType"] = vendorType;
     doc["address"] = address;
+
+    return doc;
+}
+
+const formatVendorServiceReviewData = (data) => {
+    const doc = {};
+    const locations = [];
+    console.log(data);
+
+    for (key in data) {
+        if (key.startsWith("location--")) {
+            locations.push(data[key]);
+        }
+    }
+
+    doc["locations"] = locations;
+    doc["services"] = data["services"];
+
+    if (data["rating"]) {
+        doc["rating"] = parseInt(data["rating"]);
+    }
+
+    doc["comments"] = data["comments"];
+    doc["avgCost"] = data["avgCost"];
 
     return doc;
 }
@@ -56,43 +81,25 @@ exports.showNewVendorForm = (req, res) => {
 }
 
 exports.showEditVendorForm = async (req, res) => {
+    const reviewer = req.session.user._id;
     const _id = req.params.id;
 
     try {
-        const vendor = await Vendor.findOne({ _id });
+        let vendor = await Vendor.findOne({ _id });
+        const vendorReview = await VendorReview.findOne({ reviewer, vendor: _id });
+
+        if (vendorReview) {
+            vendor = {
+                ...vendor.toObject(),
+                ...vendorReview.toObject(),
+                _id: vendor._id // ensure id is vendor's not vendorReview
+            };
+        }
+        // console.log(vendor);
+
         res.render("./vendors/edit", {
             vendor
         });
-    } catch (err) {
-        console.log(err);
-        res.redirect("/users/me/vendors");
-    }
-}
-
-exports.updateVendor = async (req, res) => {
-    try {
-        const _id = req.params.id;
-        const data = req.body;
-
-        if (!isValidSubmission(data)) {
-            console.log("insufficient vendor data submitted");
-            res.redirect("/users/me/vendors");
-            return;
-        }
-
-        const vendorObj = formatVendorData(data);
-
-        const vendor = await Vendor.findOne({ _id });
-
-        for (key in vendorObj) {
-            vendor[key] = vendorObj[key];
-        }
-
-        vendor.updatedAt = new Date();
-
-        vendor.save();
-
-        res.redirect("/users/me/vendors");
     } catch (err) {
         console.log(err);
         res.redirect("/users/me/vendors");
@@ -110,7 +117,9 @@ exports.createVendor = async (req, res) => {
             return;
         }
 
+        // create vendor with contact info
         const vendorObj = formatVendorData(data);
+        console.log(vendorObj);
 
         const vendor = await Vendor.create({
             ...vendorObj,
@@ -120,6 +129,15 @@ exports.createVendor = async (req, res) => {
         const user = await User.findOne({ _id });
         user.vendors.push(vendor._id);
         await user.save();
+
+        // add vendor service & review info
+        const serviceReviewObj = formatVendorServiceReviewData(data);
+
+        const review = await VendorReview.create({
+            ...serviceReviewObj,
+            reviewer: _id,
+            vendor: vendor._id
+        });
 
         res.redirect("/users/me/vendors");
     } catch (err) {
@@ -132,10 +150,94 @@ exports.showVendorProfile = async (req, res) => {
     const _id = req.params.id;
 
     try {
-        const vendor = await Vendor.findOne({ _id });
+        const vendor = (await Vendor.findOne({ _id })).toObject();
+        const vendorReviews = await VendorReview.find({ vendor: _id });
+
+        if (vendorReviews && vendorReviews.length > 0) {
+            const locations = [];
+            const reviews = [];
+            let numRatings = 0;
+            let totalRating = 0;
+            let numCosts = 0;
+            let totalCost = 0;
+
+            vendorReviews.map(review => {
+                review.locations.map(loc => {
+                    if (!locations.includes(loc)) {
+                        locations.push(loc);
+                    }
+                });
+                reviews.push({
+                    cost: review.avgCost,
+                    rating: review.rating,
+                    comments: review.comments
+                });
+
+                if (review.rating) {
+                    numRatings++;
+                    totalRating += review.rating;
+                }
+
+                if (review.avgCost) {
+                    numCosts++;
+                    totalCost += review.avgCost;
+                }
+            });
+
+            vendor.locations = locations;
+            vendor.reviews = reviews;
+            vendor.avgCost = totalCost / numCosts;
+            vendor.avgRating = totalRating / numRatings;
+        }
+
+        console.log(vendor);
+
         res.render("./vendors/show", {
             vendor
         })
+    } catch (err) {
+        console.log(err);
+        res.redirect("/users/me/vendors");
+    }
+}
+
+exports.updateVendor = async (req, res) => {
+    try {
+        const _id = req.params.id;
+        const reviewer = req.session.user._id;
+        const data = req.body;
+
+        if (!isValidSubmission(data)) {
+            console.log("insufficient vendor data submitted");
+            res.redirect("/users/me/vendors");
+            return;
+        }
+
+        // update vendor contact
+        const vendorObj = formatVendorData(data);
+        const vendor = await Vendor.findOne({ _id });
+
+        console.log(_id);
+        console.log(vendor);
+        for (key in vendorObj) {
+            vendor[key] = vendorObj[key];
+        }
+
+        vendor.updatedAt = new Date();
+        await vendor.save();
+
+        // update vendor review
+        const serviceReviewObj = formatVendorServiceReviewData(data);
+        const vendorReview = await VendorReview.findOne({ reviewer, vendor: _id });
+
+        for (key in serviceReviewObj) {
+            vendorReview[key] = serviceReviewObj[key];
+        }
+
+        vendorReview.updatedAt = new Date();
+        await vendorReview.save();
+
+        res.redirect("/users/me/vendors");
     } catch (err) {
         console.log(err);
         res.redirect("/users/me/vendors");

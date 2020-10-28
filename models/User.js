@@ -24,10 +24,6 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: "Vendor"
     }],
-    // watchList: [{
-    //     type: mongoose.Schema.ObjectId,
-    //     ref: "Vendor"
-    // }],
     friends: [{
         type: mongoose.Schema.ObjectId,
         ref: "User"

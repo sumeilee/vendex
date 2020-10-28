@@ -119,10 +119,98 @@
                         </div>
                     </div>
                 </div>
-
             </div>
 
-            <button class="form-btn" type="submit">Add To My List</button>
+            <div class="form-section" id="section--service">
+                <h3 class="form-section__header">Service Information</h3>
+
+                <div class="form-input">
+                    <label class="form-input__label" for="location">Where does the servicing usually take place?</label>
+                    <% const locations = ["North", "South", "East", "West", "Central"]; %>
+                    <% if (locations.length > 2) { %>
+                    <div class="column-wrap">
+                        <% } %>
+
+                        <% locations.forEach((location, idx) => { %>
+                        <% const slug = location.toLowerCase().replace(" ", "_"); %>
+
+                        <div class="form-input--checkbox">
+                            <input class="checkbox-input" type="checkbox" name="<%= `location--${slug}` %>"
+                                id="<%= `${slug}` %>" value="<%= `${location}` %>">
+                            <label class="checkbox-label" for="<%= `${slug}` %>"><%= location %></label>
+                        </div>
+                        <% }); %>
+                        <% if (locations.length > 2) { %>
+                    </div>
+                    <% } %>
+                </div>
+
+                <div class="form-input">
+                    <label class="form-input__label" for="avgCost">How much on average do you usually spend for this
+                        vendor's services?</label>
+                    $ <input class="form-input__input short" type="number" name="avgCost" id="avgCost" />
+                </div>
+
+                <div class="form-input">
+                    <label class="form-input__label" for="services">What specific services does this vendor usually
+                        provide you?</label>
+                    <textarea name="services" id="services" rows="2"></textarea>
+                </div>
+
+                <div class="form-section" id="section--review">
+                    <h3 class="form-section__header">Review</h3>
+                    <div class="form-input">
+                        <label class="form-input__label">Rating</label>
+                        <div class="radio-section">
+                            <div class="radio-input">
+                                <input type="radio" id="rating-1" name="rating" value="1">
+                                <label for="rating-1">
+                                    1
+                                    <span class="label-break"><br></span>
+                                    <span class="label-dash"> - </span>
+                                    Very Poor
+                                </label>
+                            </div>
+                            <div class="radio-input">
+                                <input type="radio" id="rating-2" name="rating" value="2">
+                                <label for="rating-2">
+                                    2
+                                </label>
+                            </div>
+                            <div class="radio-input">
+                                <input type="radio" id="rating-3" name="rating" value="3">
+                                <label for="rating-3">
+                                    3
+                                    <span class="label-break"><br></span>
+                                    <span class="label-dash"> - </span>
+                                    Average
+                                </label>
+                            </div>
+                            <div class="radio-input">
+                                <input type="radio" id="rating-4" name="rating" value="4">
+                                <label for="rating-4">
+                                    4
+                                </label>
+                            </div>
+                            <div class="radio-input">
+                                <input type="radio" id="rating-5" name="rating" value="5">
+                                <label for="rating-5">
+                                    5
+                                    <span class="label-break"><br></span>
+                                    <span class="label-dash"> - </span>
+                                    Excellent
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-input">
+                        <label class="form-input__label" for="labels">Comments</label>
+                        <textarea name="comments" id="comments" rows="5"></textarea>
+                    </div>
+                </div>
+
+                <button class="form-btn" type="submit">Add To My List</button>
         </form>
     </div>
 </main>

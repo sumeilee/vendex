@@ -2,11 +2,34 @@
 
 <main class="show-vendor">
     <div class="show-vendor-container">
-        <p class="profile__company-name"><%= vendor.companyName %></p>
-        <p class="profile__contact-name"><%= vendor.contactName %></p>
-        <p class="profile__contact-number"><%= vendor.contactNumber %></p>
-        <p class="profile__email"><%= vendor.email %></p>
-        <p class="profile__url"><%= vendor.url %></p>
+        <div class="show-vendor-section show-vendor--title">
+            <h3 class="profile__company-name"><%= vendor.companyName %></h3>
+            <h3 class="profile__contact-name"><%= vendor.contactName %></h3>
+        </div>
+
+        <div class="show-vendor-section show-vendor--contact">
+            <p class="show-section--header">Contact</p>
+            <p class="profile__contact-number"><%= vendor.contactNumber %></p>
+            <p class="profile__email"><%= vendor.email %></p>
+            <p class="profile__url"><%= vendor.url %></p>
+        </div>
+
+        <div class="show-vendor-section show-vendor--services">
+            <p class="show-section--header">Service</p>
+            <p>Locations: <%= vendor.locations %></p>
+            <p>Average Cost: $<%= vendor.avgCost %></p>
+            <p>Average Rating: <%= vendor.avgRating %></p>
+        </div>
+
+        <div class="show-vendor-section show-vendor--reviews">
+            <p class="show-section--header">Reviews</p>
+            <% vendor.reviews.forEach(review => { %>
+            <p>$<%= review.cost %></p>
+            <p><%= review.rating %>/5</p>
+            <p><%= review.comments %></p>
+            <% }); %>
+        </div>
+
     </div>
 </main>
 

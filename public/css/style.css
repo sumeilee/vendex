@@ -527,14 +527,6 @@ p {
     width: 100%;
 }
 
-/* DASHBOARD */
-
-// .dashboard {
-//     max-width: 650px;
-//     position: relative;
-//     width: 100%;
-// }
-
 .dashboard-vendors
  {
     align-items: center;
@@ -600,6 +592,10 @@ p {
 .show-section--header {
     // font-size: 1.25rem;
     font-weight: bold;
+}
+
+.green {
+    color: green;
 }
 
 /* MEDIA QUERIES */

@@ -7,27 +7,27 @@ exports.showUserVendors = async (req, res) => {
     const _id = req.session.user._id;
     const whose = req.query.whose || "mine";
 
-    let vendors;
-
     try {
+        const me = await User.findOne({ _id }).populate("vendors").populate({
+            path: "friends",
+            populate: { path: "vendors" }
+        });
+
+        const myVendors = me.vendors;
+        const myVendorsIds = me.vendors.map(vendor => vendor._id);
+        const friendsVendors = me.friends.map(friend => friend.vendors).flat();
+
+        let vendorObj;
+
         if (whose === "mine") {
-            // vendors = await Vendor.find({ user: _id });
-            const me = await User.findOne({ _id }).populate("vendors");
-            vendors = me.vendors;
-
+            vendorObj = createVendorObj(myVendors);
         } else if (whose === "friends") {
-            const me = await User.findOne({ _id }).populate({
-                path: "friends",
-                populate: { path: "vendors" }
-            });
-
-            vendors = me.friends.map(friend => friend.vendors).flat();
+            vendorObj = createVendorObj(friendsVendors);
         }
-
-        const vendorObj = createVendorObj(vendors);
 
         res.render("./users/vendors", {
             whose,
+            myVendorsIds,
             vendorObj
         });
     } catch (err) {

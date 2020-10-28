@@ -80,32 +80,6 @@ exports.showNewVendorForm = (req, res) => {
     res.render("./vendors/new");
 }
 
-exports.showEditVendorForm = async (req, res) => {
-    const reviewer = req.session.user._id;
-    const _id = req.params.id;
-
-    try {
-        let vendor = await Vendor.findOne({ _id });
-        const vendorReview = await VendorReview.findOne({ reviewer, vendor: _id });
-
-        if (vendorReview) {
-            vendor = {
-                ...vendor.toObject(),
-                ...vendorReview.toObject(),
-                _id: vendor._id // ensure id is vendor's not vendorReview
-            };
-        }
-        // console.log(vendor);
-
-        res.render("./vendors/edit", {
-            vendor
-        });
-    } catch (err) {
-        console.log(err);
-        res.redirect("/users/me/vendors");
-    }
-}
-
 exports.createVendor = async (req, res) => {
     try {
         const _id = req.session.user._id;
@@ -190,11 +164,37 @@ exports.showVendorProfile = async (req, res) => {
             vendor.avgRating = totalRating / numRatings;
         }
 
-        console.log(vendor);
+        // console.log(vendor);
 
         res.render("./vendors/show", {
             vendor
         })
+    } catch (err) {
+        console.log(err);
+        res.redirect("/users/me/vendors");
+    }
+}
+
+exports.showEditVendorForm = async (req, res) => {
+    const reviewer = req.session.user._id;
+    const _id = req.params.id;
+
+    try {
+        let vendor = await Vendor.findOne({ _id });
+        const vendorReview = await VendorReview.findOne({ reviewer, vendor: _id });
+
+        if (vendorReview) {
+            vendor = {
+                ...vendor.toObject(),
+                ...vendorReview.toObject(),
+                _id: vendor._id // ensure id is vendor's not vendorReview
+            };
+        }
+        // console.log(vendor);
+
+        res.render("./vendors/edit", {
+            vendor
+        });
     } catch (err) {
         console.log(err);
         res.redirect("/users/me/vendors");
@@ -217,8 +217,8 @@ exports.updateVendor = async (req, res) => {
         const vendorObj = formatVendorData(data);
         const vendor = await Vendor.findOne({ _id });
 
-        console.log(_id);
-        console.log(vendor);
+        // console.log(_id);
+        // console.log(vendor);
         for (key in vendorObj) {
             vendor[key] = vendorObj[key];
         }
@@ -230,12 +230,22 @@ exports.updateVendor = async (req, res) => {
         const serviceReviewObj = formatVendorServiceReviewData(data);
         const vendorReview = await VendorReview.findOne({ reviewer, vendor: _id });
 
-        for (key in serviceReviewObj) {
-            vendorReview[key] = serviceReviewObj[key];
-        }
+        if (!vendorReview) {
+            // console.log("creating new review");
+            await VendorReview.create({
+                ...serviceReviewObj,
+                reviewer,
+                vendor: _id
+            });
+        } else {
+            // console.log("editing review");
+            for (key in serviceReviewObj) {
+                vendorReview[key] = serviceReviewObj[key];
+            }
 
-        vendorReview.updatedAt = new Date();
-        await vendorReview.save();
+            vendorReview.updatedAt = new Date();
+            await vendorReview.save();
+        }
 
         res.redirect("/users/me/vendors");
     } catch (err) {

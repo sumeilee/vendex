@@ -16,7 +16,7 @@
 
         <div class="show-vendor-section show-vendor--services">
             <p class="show-section--header">Service</p>
-            <p>Locations: <%= vendor.locations %></p>
+            <p>Locations: <%= vendor.locations.join(', '); %></p>
             <p>Average Cost: $<%= vendor.avgCost %></p>
             <p>Average Rating: <%= vendor.avgRating %></p>
         </div>

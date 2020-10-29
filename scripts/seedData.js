@@ -81,6 +81,7 @@ const demoData = [
         vendors: [
             {
                 vendor: {
+                    vendorType: ["Locksmith"],
                     companyName: "Little Locksmith",
                     contactNumber: "+65 6653 6259",
                     email: "enquiry@littlelocksmith.com"
@@ -94,6 +95,7 @@ const demoData = [
             },
             {
                 vendor: {
+                    vendorType: ["Cleaner"],
                     companyName: "Whissh Home Cleaning Service",
                     contactNumber: "+65 6221 8626",
                     email: "www.whissh.com.sg"

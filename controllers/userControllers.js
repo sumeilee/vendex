@@ -17,6 +17,8 @@ exports.showUserVendors = async (req, res) => {
         const myVendorsIds = me.vendors.map(vendor => vendor._id);
         const friendsVendors = me.friends.map(friend => friend.vendors).flat();
 
+        // console.log(friendsVendors);
+
         let vendorObj;
 
         if (whose === "mine") {
@@ -24,6 +26,8 @@ exports.showUserVendors = async (req, res) => {
         } else if (whose === "friends") {
             vendorObj = createVendorObj(friendsVendors);
         }
+
+        // console.log(vendorObj);
 
         res.render("./users/vendors", {
             whose,

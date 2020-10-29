@@ -38,7 +38,7 @@
                             <form action="/users/me/vendors" method="POST">
                                 <input type="hidden" name="vendorId" value="<%= vendor._id %>">
                                 <% if (myVendorsIds.includes(vendor._id)) { %>
-                                <p class="green">Added to List</p>
+                                <p class="green">Already in List</p>
                                 <% } else { %>
                                 <button type="submit">Add to My List</button>
                                 <% } %>

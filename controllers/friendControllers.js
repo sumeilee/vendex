@@ -44,6 +44,12 @@ exports.addFriend = async (req, res) => {
             return;
         }
 
+        if (email === me.email) {
+            console.log("Can't add yourself as friend");
+            res.redirect("/users/me/friends");
+            return;
+        }
+
         if (!me.friends.includes(friend._id)) {
             me.friends.push(friend._id);
             await me.save();
@@ -53,7 +59,7 @@ exports.addFriend = async (req, res) => {
                 await friend.save();
             }
         } else {
-            console.log("friend already in list");
+            console.log("Friend already in list");
         }
 
         res.redirect("/users/me/friends");
@@ -66,25 +72,41 @@ exports.addFriend = async (req, res) => {
 exports.deleteFriend = async (req, res) => {
     const _id = req.session.user._id;
     const { email } = req.body;
+    const { show } = req.query;
 
     try {
         const user = await User.findOne({ _id });
         const friend = await User.findOne({ email });
 
-        console.log("deleting friend");
-        user.friends.splice(user.friends.indexOf(friend._id), 1);
-        await user.save();
+        if (show === "friends") {
+            // remove friend from my friend list
+            user.friends.splice(user.friends.indexOf(friend._id), 1);
+            await user.save();
 
-        console.log("deleting follower");
-        friend.followers.splice(friend.followers.indexOf(user._id), 1);
-        await friend.save();
+            // remove me from friend's follower list
+            friend.followers.splice(friend.followers.indexOf(user._id), 1);
+            await friend.save();
 
-        res.redirect("/users/me/friends");
+
+        } else if (show === "followers") {
+            // remove friend from my followers list
+            user.followers.splice(user.followers.indexOf(friend._id), 1);
+            await user.save();
+            console.log(user);
+
+            // remove me from friend's friend list
+            friend.friends.splice(friend.friends.indexOf(user._id), 1);
+            await friend.save();
+            console.log(friend);
+
+            res.redirect("/users/me/friends?show=followers");
+        }
+
     } catch (err) {
         console.log(err);
         res.redirect("/users/me/friends");
     }
-}
+};
 
 exports.getFriendsWithVendors = async (req, res) => {
     const _id = req.session.user;

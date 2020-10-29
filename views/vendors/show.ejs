@@ -9,25 +9,32 @@
 
         <div class="show-vendor-section show-vendor--contact">
             <p class="show-section--header">Contact</p>
-            <p class="profile__contact-number"><%= vendor.contactNumber %></p>
-            <p class="profile__email"><%= vendor.email %></p>
-            <p class="profile__url"><a href="<%= vendor.url %>"><%= vendor.url %></a></p>
+            <div class="show-content">
+                <p class="profile__contact-number"><%= vendor.contactNumber %></p>
+                <p class="profile__email"><%= vendor.email %></p>
+                <p class="profile__url"><a href="<%= vendor.url %>"><%= vendor.url %></a></p>
+            </div>
         </div>
 
         <% if (serviceReview) { %>
         <div class="show-vendor-section show-vendor--services">
             <p class="show-section--header">Service</p>
-            <p>Locations: <%= serviceReview.locations.join(', '); %></p>
-            <p>Average Cost: $<%= serviceReview.avgCost %></p>
-            <p>Average Rating: <%= serviceReview.avgRating %></p>
+            <div class="show-content">
+                <p>Locations: <%= serviceReview.locations.join(', '); %></p>
+                <p>Average Cost: $<%= serviceReview.avgCost %></p>
+                <p>Average Rating: <%= serviceReview.avgRating %></p>
+            </div>
         </div>
 
         <div class="show-vendor-section show-vendor--reviews">
             <p class="show-section--header">Reviews</p>
+            <% const numReviews = serviceReview.reviews.length; %>
             <% serviceReview.reviews.forEach(review => { %>
-            <p>$<%= review.cost %></p>
-            <p><%= review.rating %>/5</p>
-            <p><%= review.comments %></p>
+            <div class="show-content <% if (numReviews > 1) { %>show-review-divider<% } %>">
+                <!-- <p>Cost: $<%= review.cost %></p> -->
+                <p>Rating: <%= review.rating %>/5</p>
+                <p>Comments: <%= review.comments %></p>
+            </div>
             <% }); %>
         </div>
         <% } %>

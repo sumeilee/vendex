@@ -634,6 +634,16 @@ p {
     color: green;
 }
 
+/* SHOW PAGE */
+
+.show-content {
+    margin: 20px 0;
+}
+
+.show-review-divider {
+    border-bottom: 1px solid var(--theme-base-color);
+}
+
 /* MEDIA QUERIES */
 
 @media only screen and (min-width: 600px) {

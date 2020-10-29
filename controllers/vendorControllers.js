@@ -41,6 +41,8 @@ const anyServiceReviewData = (data) => {
             anyData = true;
         }
     });
+
+    return anyData;
 };
 
 const formatVendorServiceReviewData = (data) => {
@@ -259,7 +261,7 @@ exports.updateVendor = async (req, res) => {
         // update vendor review
         const serviceReviewObj = formatVendorServiceReviewData(data);
         const vendorReview = await VendorReview.findOne({ reviewer, vendor: _id });
-
+        console.log(serviceReviewObj);
         if (!vendorReview) {
             // console.log("creating new review");
             await VendorReview.create({

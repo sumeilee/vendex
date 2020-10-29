@@ -11,24 +11,27 @@
             <p class="show-section--header">Contact</p>
             <p class="profile__contact-number"><%= vendor.contactNumber %></p>
             <p class="profile__email"><%= vendor.email %></p>
-            <p class="profile__url"><%= vendor.url %></p>
+            <p class="profile__url"><a href="<%= vendor.url %>"><%= vendor.url %></a></p>
         </div>
 
+        <% if (serviceReview) { %>
         <div class="show-vendor-section show-vendor--services">
             <p class="show-section--header">Service</p>
-            <p>Locations: <%= vendor.locations.join(', '); %></p>
-            <p>Average Cost: $<%= vendor.avgCost %></p>
-            <p>Average Rating: <%= vendor.avgRating %></p>
+            <p>Locations: <%= serviceReview.locations.join(', '); %></p>
+            <p>Average Cost: $<%= serviceReview.avgCost %></p>
+            <p>Average Rating: <%= serviceReview.avgRating %></p>
         </div>
 
         <div class="show-vendor-section show-vendor--reviews">
             <p class="show-section--header">Reviews</p>
-            <% vendor.reviews.forEach(review => { %>
+            <% serviceReview.reviews.forEach(review => { %>
             <p>$<%= review.cost %></p>
             <p><%= review.rating %>/5</p>
             <p><%= review.comments %></p>
             <% }); %>
         </div>
+        <% } %>
+
 
     </div>
 </main>

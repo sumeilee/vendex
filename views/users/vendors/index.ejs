@@ -16,43 +16,49 @@
             <div class="vendor-header">
                 <p><%= vendorType %></p>
             </div>
-            <% vendorObj[vendorType].forEach(vendor => { %>
-            <div class="dashboard-vendors__card vendor-card">
-                <div class="dashboard-vendors__summary">
-                    <p><%= vendor.companyName %></p>
-                    <p><%= vendor.contactName %></p>
-                    <p>
-                        <a href="tel:<%= vendor.contactNumber %>" class="phoneNumber">
-                            <%= vendor.contactNumber %>
-                        </a>
-                    </p>
-                    <p><%= vendor.email %></p>
+            <div class="vendor-cards">
+                <% vendorObj[vendorType].forEach(vendor => { %>
+                <div class="dashboard-vendors__card vendor-card">
+                    <div class="dashboard-vendors__summary">
+                        <div class="summary-content">
+                            <p><%= vendor.companyName %></p>
+                            <p><%= vendor.contactName %></p>
+                            <p>
+                                <a href="tel:<%= vendor.contactNumber %>" class="phoneNumber">
+                                    <%= vendor.contactNumber %>
+                                </a>
+                            </p>
+                            <p><%= vendor.email %></p>
 
-                    <p><a href="/vendors/<%= vendor._id %>" class="detail-link">More details</a></p>
-                    <div class="vendor-btns">
-                        <% if (whose === "friends") { %>
-                        <form action="/users/me/vendors" method="POST">
-                            <input type="hidden" name="vendorId" value="<%= vendor._id %>">
-                            <% if (myVendorsIds.includes(vendor._id)) { %>
-                            <p class="green">Added to List</p>
+                            <p><a href="/vendors/<%= vendor._id %>" class="detail-link">More details</a></p>
+                        </div>
+
+                        <div class="vendor-btns">
+                            <% if (whose === "friends") { %>
+                            <form action="/users/me/vendors" method="POST">
+                                <input type="hidden" name="vendorId" value="<%= vendor._id %>">
+                                <% if (myVendorsIds.includes(vendor._id)) { %>
+                                <p class="green">Added to List</p>
+                                <% } else { %>
+                                <button type="submit">Add to My List</button>
+                                <% } %>
+                            </form>
                             <% } else { %>
-                            <button type="submit">Add to My List</button>
+                            <form action="/vendors/<%= vendor._id %>/edit" method="GET">
+                                <button type="submit">Edit</button>
+                            </form>
+                            <form action="/users/me/vendors?_method=DELETE" method="POST">
+                                <input type="hidden" name="vendorId" value="<%= vendor._id %>">
+                                <button type="submit">Remove</button>
+                            </form>
                             <% } %>
-                        </form>
-                        <% } else { %>
-                        <form action="/vendors/<%= vendor._id %>/edit" method="GET">
-                            <button type="submit">Edit</button>
-                        </form>
-                        <form action="/users/me/vendors?_method=DELETE" method="POST">
-                            <input type="hidden" name="vendorId" value="<%= vendor._id %>">
-                            <button type="submit">Remove</button>
-                        </form>
-                        <% } %>
-                    </div>
+                        </div>
 
+                    </div>
                 </div>
+                <% }) %>
             </div>
-            <% }) %>
+
         </div>
         <% }) %>
 

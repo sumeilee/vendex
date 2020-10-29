@@ -9,6 +9,7 @@ body {
     flex-direction: column;
     height: 100%;
     font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
 
     // prevent text in other cells from being highlighted when clicking div
     // user-select: none;
@@ -189,6 +190,7 @@ p {
 .add-vendor,
 .vendors,
 .user-vendors {
+    box-sizing: border-box;
     justify-content: center;
     padding: 20px 40px;
 }
@@ -198,6 +200,7 @@ p {
 .add-vendor-container,
 .vendors-container,
 .user-vendors-container {
+    box-sizing: border-box;
     justify-content: flex-start;
     position: relative;
 }
@@ -209,8 +212,18 @@ p {
 }
 
 .vendor-cards {
+    box-sizing: border-box;
     display: flex;
     flex-flow: row wrap;
+    justify-content: flex-start;
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+/* USER VENDORS */
+
+.user-vendors-container {
+    width: 100%;
 }
 
 /* FRIENDS */
@@ -277,12 +290,14 @@ p {
 }
 
 .vendor-header p {
-    margin: 10px 0;
+    margin: 5px 0;
 }
 
 .vendor-btns {
     display: flex;
     flex-flow: row wrap;
+    // position: absolute;
+    // bottom: 0;
 }
 
 .vendor-btns button {
@@ -529,34 +544,55 @@ p {
 
 .dashboard-vendors
  {
-    align-items: center;
+     align-items: stretch;
+    // align-items: center;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
+    margin-bottom: 15px;
 }
 
 .dashboard-vendors__header {
     width: 100%;
 }
 
+// .dashboard-vendors__summary {
+//     display: flex;
+//     flex-flow: column wrap;
+//     justify-content: space-between;
+// }
+
 .dashboard-vendors__card {
-    border: 1px solid lightgrey;
+    // border: 1px solid lightgrey;
+    align-items: stretch;
+    border: none;
     border-radius: 10px;
+    display: flex;
+    height: 100%;
     margin-bottom: 10px;
-    padding: 20px;
+    // padding: 20px;
+    padding: 5px;
     width: 100%;
 }
 
+// .summary-content {
+//     display: flex;
+//     flex-flow: column wrap;
+//     justify-content: space-between;
+// }
+
 .vendor-header {
+    border-bottom: 1px solid var(--theme-base-color);
     font-size: 1.25rem;
     width: 100%;
 }
 
-.vendor-card {
-    border: none;
-    width: 100%;
-    padding: 5px;
-}
+// .vendor-card {
+//     border: none;
+//     height: 100%;
+//     width: 100%;
+//     padding: 5px;
+// }
 
 /* ADD BUTTON */
 
@@ -601,6 +637,10 @@ p {
 /* MEDIA QUERIES */
 
 @media only screen and (min-width: 600px) {
+    body {
+        font-size: 1rem;
+    }
+
     .radio-input {
         align-items: center;
         flex-flow: column wrap;
@@ -707,11 +747,13 @@ p {
     }
 
     .dashboard-vendors__card {
-        margin: 10px;
-        width: 250px;
+        // margin: 10px;
+        margin: 0 10px 10px 0;
+        min-width: 250px;
+        width: auto;
     }
 
-    .vendor-card {
-        width: 200px;
-    }
+    // .vendor-card {
+    //     width: 200px;
+    // }
 }

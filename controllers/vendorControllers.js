@@ -25,13 +25,35 @@ const formatVendorData = (data) => {
     return doc;
 }
 
-const formatVendorServiceReviewData = (data) => {
-    const doc = {};
-    const locations = [];
-    console.log(data);
+const anyServiceReviewData = (data) => {
+    let anyData = false;
 
     for (key in data) {
         if (key.startsWith("location--")) {
+            anyData = true;
+        }
+    }
+
+    const fields = ["services", "rating", "avgCost", "comments"];
+
+    fields.forEach(field => {
+        if (data[field]) {
+            anyData = true;
+        }
+    });
+};
+
+const formatVendorServiceReviewData = (data) => {
+    const doc = {};
+    const locations = [];
+
+    if (!anyServiceReviewData(data)) {
+        return null;
+    }
+
+    for (key in data) {
+        if (key.startsWith("location--")) {
+            anyData = true;
             locations.push(data[key]);
         }
     }
@@ -44,7 +66,10 @@ const formatVendorServiceReviewData = (data) => {
     }
 
     doc["comments"] = data["comments"];
-    doc["avgCost"] = data["avgCost"];
+
+    if (data["avgCost"]) {
+        doc["avgCost"] = parseFloat(data["avgCost"]);
+    }
 
     return doc;
 }
@@ -107,11 +132,13 @@ exports.createVendor = async (req, res) => {
         // add vendor service & review info
         const serviceReviewObj = formatVendorServiceReviewData(data);
 
-        const review = await VendorReview.create({
-            ...serviceReviewObj,
-            reviewer: _id,
-            vendor: vendor._id
-        });
+        if (serviceReviewObj) {
+            const review = await VendorReview.create({
+                ...serviceReviewObj,
+                reviewer: _id,
+                vendor: vendor._id
+            });
+        }
 
         res.redirect("/users/me/vendors");
     } catch (err) {
@@ -126,8 +153,10 @@ exports.showVendorProfile = async (req, res) => {
     try {
         const vendor = (await Vendor.findOne({ _id })).toObject();
         const vendorReviews = await VendorReview.find({ vendor: _id });
+        let serviceReview = null;
 
         if (vendorReviews && vendorReviews.length > 0) {
+
             const locations = [];
             const reviews = [];
             let numRatings = 0;
@@ -158,16 +187,17 @@ exports.showVendorProfile = async (req, res) => {
                 }
             });
 
-            vendor.locations = locations;
-            vendor.reviews = reviews;
-            vendor.avgCost = totalCost / numCosts;
-            vendor.avgRating = totalRating / numRatings;
+            serviceReview = {
+                locations,
+                reviews,
+                avgCost: totalCost / numCosts,
+                avgRating: totalRating / numRatings
+            };
         }
 
-        // console.log(vendor);
-
         res.render("./vendors/show", {
-            vendor
+            vendor,
+            serviceReview
         })
     } catch (err) {
         console.log(err);

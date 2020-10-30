@@ -10,18 +10,23 @@
                 href="/users/me/friends?show=followers">Followers</a>
         </div>
 
-        <% friends.forEach(friend => { %>
+        <% networkList.forEach(person => { %>
         <div class="friend">
-            <%= friend.email %>
+            <%= person.email %>
             <div class="friend-btns">
                 <% if (show === "followers") { %>
+                <% if (userFriends.map(friend => friend.email).includes(person.email)) { %>
+                <p class="green">Following</p>
+                <% } else { %>
                 <form action="/users/me/friends" method="POST">
-                    <input type="hidden" name="email" value="<%= friend.email %>">
+                    <input type="hidden" name="email" value="<%= person.email %>">
                     <button type="submit">Follow</button>
                 </form>
                 <% } %>
+
+                <% } %>
                 <form action="/users/me/friends?show=<%= show %>&_method=DELETE" method="POST">
-                    <input type="hidden" name="email" value="<%= friend.email %>">
+                    <input type="hidden" name="email" value="<%= person.email %>">
                     <button type="submit">Remove</button>
                 </form>
             </div>

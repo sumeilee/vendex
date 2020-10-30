@@ -279,7 +279,8 @@ exports.updateVendor = async (req, res) => {
             await vendorReview.save();
         }
 
-        res.redirect("/users/me/vendors");
+        res.redirect(`/vendors/${_id}`);
+        // res.redirect("/users/me/vendors");
     } catch (err) {
         console.log(err);
         res.redirect("/users/me/vendors");

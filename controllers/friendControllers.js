@@ -4,20 +4,22 @@ exports.showFriends = async (req, res) => {
     const _id = req.session.user._id;
     const show = req.query.show || "friends";
 
-    let friends;
-
     try {
+        const user = await User.findOne({ _id }).populate("friends", "email").populate("followers", "email");
+        const userFriends = user.friends.map(({ email }) => ({ email }));
+
+        let networkList;
+
         if (show === "friends") {
-            const user = await User.findOne({ _id }).populate("friends", "email");
-            friends = user.friends.map(({ email }) => ({ email }));
+            networkList = userFriends;
         } else {
-            const user = await User.findOne({ _id }).populate("followers", "email");
-            friends = user.followers.map(({ email }) => ({ email }));
+            networkList = user.followers.map(({ email }) => ({ email }));
         }
 
         res.render("./users/friends/index", {
             show,
-            friends
+            userFriends,
+            networkList
         });
     } catch (err) {
         console.log(err);

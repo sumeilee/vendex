@@ -60,7 +60,7 @@ app.post("/login", authControllers.login);
 app.post("/logout", authControllers.logout);
 
 // VENDOR ROUTES
-app.get("/vendors", vendorControllers.showVendors);
+// app.get("/vendors", vendorControllers.showVendors);
 
 app.get(
     "/vendors/new",

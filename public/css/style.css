@@ -235,7 +235,7 @@ p {
 
 .friends-container {
     justify-content: flex-start;
-    max-width: 400px;
+    max-width: 500px;
     position: relative;
     width: 100%;
 }
@@ -243,10 +243,9 @@ p {
 .friend {
     align-items: center;
     display: flex;
-    flex-flow: row-wrap;
+    flex-flow: row wrap;
     justify-content: space-between;
     margin: 10px 0;
-    max-width: 400px;
     width: 100%;
 }
 
@@ -261,13 +260,21 @@ p {
 }
 
 .friend-btns {
-    align-items: center;
+    align-items: flex-end;
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column wrap;
 }
 
 .friend-btns button {
-    margin-left: 10px;
+    margin: 5px 0 5px 5px;
+    width: 90px;
+}
+
+.friend-btns p.green {
+    box-sizing: border-box;
+    padding: 5px 10px;
+    text-align: center;
+    width: 90px;
 }
 
 /* ADD FRIEND */
@@ -749,5 +756,18 @@ p {
         margin: 0 10px 10px 0;
         min-width: 250px;
         width: auto;
+    }
+
+    .friend-btns {
+        align-items: center;
+        flex-flow: row wrap;
+    }
+
+    .friend-btns button {
+        width: 100px;
+    }
+
+    .friend-btns p.green {
+        width: 100px;
     }
 }

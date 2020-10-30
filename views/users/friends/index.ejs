@@ -12,7 +12,7 @@
 
         <% networkList.forEach(person => { %>
         <div class="friend">
-            <%= person.email %>
+            <p><%= person.email %></p>
             <div class="friend-btns">
                 <% if (show === "followers") { %>
                 <% if (userFriends.map(friend => friend.email).includes(person.email)) { %>

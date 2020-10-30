@@ -260,6 +260,15 @@ p {
     width: 100%;
 }
 
+.friend-btns {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.friend-btns button {
+    margin-left: 10px;
+}
+
 /* ADD FRIEND */
 
 .add-friend {

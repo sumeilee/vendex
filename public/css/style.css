@@ -626,7 +626,7 @@ p {
 
 .show-vendor-container {
     justify-content: flex-start;
-    max-width: 400px;
+    max-width: 600px;
     position: relative;
     width: 100%;
 }
@@ -647,7 +647,12 @@ p {
 /* SHOW PAGE */
 
 .show-content {
-    margin: 20px 0;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.show-vendor--title {
+    margin-bottom: 20px;
 }
 
 .show-review-divider {
@@ -772,8 +777,4 @@ p {
         min-width: 250px;
         width: auto;
     }
-
-    // .vendor-card {
-    //     width: 200px;
-    // }
 }

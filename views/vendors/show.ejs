@@ -10,9 +10,25 @@
         <div class="show-vendor-section show-vendor--contact">
             <p class="show-section--header">Contact</p>
             <div class="show-content">
-                <p class="profile__contact-number"><%= vendor.contactNumber %></p>
-                <p class="profile__email"><%= vendor.email %></p>
-                <p class="profile__url"><a href="<%= vendor.url %>"><%= vendor.url %></a></p>
+                <% const contactFields = ["contactNumber", "email", "url", "facebook", "instagram", "otherUrl"]; %>
+                <% contactFields.forEach(field => { %>
+                <p><%= vendor[field] %></p>
+                <% }); %>
+
+                <% if (vendor.address) { %>
+                <% const addrFields = ["addrLine1", "addrLine2", "city", "state", "postalCode", "country"]; %>
+                <% let address = ""; %>
+                <% addrFields.forEach((field, idx) => { %>
+                <% if (vendor.address[field]) { %>
+                <% if (idx > 0) { %>
+                <% address += ", "; %>
+                <% } %>
+                <% address += vendor.address[field]; %>
+                <% } %>
+                <% }); %>
+                <p><%= address %></p>
+                <% } %>
+
             </div>
         </div>
 
@@ -20,7 +36,9 @@
         <div class="show-vendor-section show-vendor--services">
             <p class="show-section--header">Service</p>
             <div class="show-content">
+                <% if (serviceReview.locations.length > 0) { %>
                 <p>Locations: <%= serviceReview.locations.join(', '); %></p>
+                <% } %>
                 <p>Average Cost: $<%= serviceReview.avgCost %></p>
                 <p>Average Rating: <%= serviceReview.avgRating %></p>
             </div>

@@ -87,7 +87,7 @@ exports.deleteFriend = async (req, res) => {
             friend.followers.splice(friend.followers.indexOf(user._id), 1);
             await friend.save();
 
-
+            res.redirect("/users/me/friends?show=friends");
         } else if (show === "followers") {
             // remove friend from my followers list
             user.followers.splice(user.followers.indexOf(friend._id), 1);

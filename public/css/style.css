@@ -517,10 +517,6 @@ p {
     cursor: pointer;
 }
 
-// .btn-active {
-//     background-color: yellow;
-// }
-
 /* LOGIN FORM */
 
 .friend-form label,
@@ -566,43 +562,21 @@ p {
     width: 100%;
 }
 
-// .dashboard-vendors__summary {
-//     display: flex;
-//     flex-flow: column wrap;
-//     justify-content: space-between;
-// }
-
 .dashboard-vendors__card {
-    // border: 1px solid lightgrey;
     align-items: stretch;
     border: none;
     border-radius: 10px;
     display: flex;
-    height: 100%;
     margin-bottom: 10px;
-    // padding: 20px;
     padding: 5px;
     width: 100%;
 }
-
-// .summary-content {
-//     display: flex;
-//     flex-flow: column wrap;
-//     justify-content: space-between;
-// }
 
 .vendor-header {
     border-bottom: 1px solid var(--theme-base-color);
     font-size: 1.25rem;
     width: 100%;
 }
-
-// .vendor-card {
-//     border: none;
-//     height: 100%;
-//     width: 100%;
-//     padding: 5px;
-// }
 
 /* ADD BUTTON */
 
@@ -626,7 +600,7 @@ p {
 
 .show-vendor-container {
     justify-content: flex-start;
-    max-width: 600px;
+    max-width: 400px;
     position: relative;
     width: 100%;
 }
@@ -685,12 +659,11 @@ p {
         display: none;
     }
 
-    .show-vendor-container,
     .edit-vendor-container,
     .add-vendor-container,
     .vendors-container,
     .user-vendors-container {
-        width: 800px;
+        width: 650px;
     }
 
     .landing--hero__content--header {
